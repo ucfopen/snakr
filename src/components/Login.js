@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import '../App.css';
 // import Dashboard from './Dashboard';
 // import  { Link } from 'react-router-dom';
+import Header from './Header';
 import {FirebaseContext} from './Firebase';
 import  UserContext from './UserContext';
 import TextField from '@material-ui/core/TextField';
@@ -94,7 +95,7 @@ function Login() {
         onChange={handleChangeIn('password')}
         margin="normal"
       />
-      <Button variant="contained" onClick={() => signinEmail(signinInputs.email,signinInputs.password)}>Sign In</Button>
+  <Button variant="contained" onClick={() => signinEmail(signinInputs.email,signinInputs.password)}>Sign In</Button>
       <p>or</p>
       {googleLogin}
       </div>
@@ -136,16 +137,18 @@ function Login() {
                 ? signupFields
                 : loginFields
         }
+        <div id="accountBox">
         {
             newUser
                 ? <Button onClick={() => createUser(false)}>Already have an account?</Button>
                 : <Button onClick={() => createUser(true)}>Need to create an account?</Button>
         }
-
+        </div>
         </div>
     )
 
     return (<div className="login">
+    <Header />
         <div className="signin">
 
             {

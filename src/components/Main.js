@@ -5,7 +5,6 @@ import Content from './Content';
 function Main() {
   return (
       <div className="main">
-      <Header />
       <Content />
 
     </div>
