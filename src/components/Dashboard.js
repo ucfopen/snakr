@@ -2,7 +2,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import UserContext from './UserContext';
 import Pantry from './Pantry';
 import Header from './Header';
-import Admin from './Admin';
+
 import { Link } from "react-router-dom";
 import {FirebaseContext} from './Firebase';
 import Button from '@material-ui/core/Button';
@@ -15,27 +15,29 @@ function Dashboard() {
     let name = userData.authUser.displayName;
 
 
-    useEffect(() => {
-        firebase.db.collection('users').doc(userData.authUser.uid).get().then(function(querySnapshot) {
-            console.log(querySnapshot)
-            if(querySnapshot.data().admin) {
-                setAdmin(true);
-            }
-        })
-    }, [firebase, userData.authUser.uid]);
+    useEffect(() => { firebase.db.collection('users').doc(userData.authUser.uid).get().then(function(querySnapshot) {
+                if(querySnapshot.data().admin) {
+                    setAdmin(true);
+                }
+            })
+    }, [firebase]);
+
+    // const unsubscribe = firebase.firestore().collection('recipes') .doc(id).onSnapshot( doc => { setLoading(false) setRecipe(doc) }, err => { setError(err) } )
 
     useEffect(() => {
-        firebase.db.collection('users').doc(userData.authUser.uid).onSnapshot(function(doc) {
+        let unsubscribe = firebase.db.collection('users').doc(userData.authUser.uid).onSnapshot(doc => {
             updateAcc(doc.data().bank);
-        })
-    }, [firebase, userData.authUser.uid]);
+        }, err => { console.log(err) })
+        return () => unsubscribe();
+
+    }, [firebase]);
 
     return (
       <div className="dashboard">
           <Header />
-        <p>Hello {name}, your balance is ${account.toFixed(2)}</p>
-        <Pantry />
-        {admin ? <Link to='/admin'><Button variant="contained">Admin</Button></Link> : ''}
+          <header>{name ? <p>Hello {name}</p> : '' }<p>Your balance is ${account.toFixed(2)}</p></header>
+          <Pantry />
+          {admin ? <Link to='/admin'><Button variant="contained">Admin</Button></Link> : ''}
       </div>
     );
 }

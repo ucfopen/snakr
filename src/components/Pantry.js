@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react';
-import Header from './Header';
 import Item from './Item';
 import {FirebaseContext} from './Firebase';
 

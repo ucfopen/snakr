@@ -35,6 +35,9 @@ class Firebase {
 
     doSignInWithGoogle = () =>
         this.auth.signInWithPopup(this.googleProvider);
+
+    doProfileUpdate = (data) =>
+        this.auth.currentUser.updateProfile(data);
 }
 
 export default Firebase;

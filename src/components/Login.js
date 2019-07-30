@@ -21,7 +21,8 @@ function Login() {
     });
     const [signupInputs, setSignup] = React.useState({
         email: '',
-        password: ''
+        password: '',
+        displayName: ''
     });
 
     const handleChangeIn = name => event => {
@@ -49,23 +50,45 @@ function Login() {
 
     function signup(email,pass) {
         firebase.doCreateUserWithEmailAndPassword(email,pass).then(authUser => {
+            console.log(authUser)
+            if(authUser.additionalUserInfo.isNewUser) {
+                if(firebase) {
+                    firebase.db.collection('users').doc(authUser.user.uid).set({bank:0, admin: false})
+                }
+
+                // // firebase.db.collection('users').doc(userData.authUser.uid).set({bank:dbUser.bank-amount, admin: dbUser.admin})
+                // console.log("new user! sweet!");
+                // firebase.doProfileUpdate({displayName:signupFields.displayName}).then(function() {
+                //     console.log("update");
+                //     checkUser(firebase.auth.currentUser);
+                //     // console.log("update");
+                // }).catch(function(error) {
+                //     console.log(error);
+                // });
+            }
             setUser(authUser.user);
         }).catch(error => {
             console.log(error);
         });
     };
 
-    function signout() {
-        firebase.doSignOut()
-    };
+    // function signout() {
+    //     firebase.doSignOut()
+    // };
+    //
+    // function checkUser(tempUser) {
+    //     if(tempUser !== user) {
+    //         console.log(tempUser);
+    //     }
+    // }
 
     useEffect(() => {
         firebase.auth.onAuthStateChanged(authUser => {
-            authUser
-                ? setUser(authUser)
-                : setUser(null);
+            // console.log(firebase.auth.currentUser);
+            authUser ? setUser(authUser) : setUser(null);
         });
     }, [firebase.auth])
+
 
     useEffect(() => {
         userData.updateUser({authUser: user });

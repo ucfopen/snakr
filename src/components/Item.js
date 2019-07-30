@@ -18,27 +18,28 @@ function Item(props) {
     const [dbUser, updatedb] = useState({});
 
     useEffect(() => {
-        firebase.db.collection('items').doc(props.item.id).onSnapshot(function(doc) {
-            // snapshot.docChanges().forEach(function(doc) {
-            //     console.log(doc);
-            // })
-            unformatted.current = doc.data().price;
-            name.current = doc.data().name;
-            amount.current = doc.data().count;
-        })
+            let unsubscribe = firebase.db.collection('items').doc(props.item.id).onSnapshot(doc => {
+                // console.log(doc);
+                unformatted.current = doc.data().price;
+                name.current = doc.data().name;
+                amount.current = doc.data().count;
+            }, err => { console.log(err) })
+            return () => unsubscribe();
     }, [firebase]);
 
     useEffect(() => {
-        firebase.db.collection('users').doc(userData.authUser.uid).onSnapshot(function(doc) {
+        let unsubscribe = firebase.db.collection('users').doc(userData.authUser.uid).onSnapshot(doc => {
             updatedb(doc.data());
-        })
-    }, [firebase]);
+        }, err => { console.log(err) })
+        return () => unsubscribe();
+}, [firebase]);
 
     function updateBank(amount) {
-        firebase.db.collection('users').doc(userData.authUser.uid).set({bank:dbUser.bank-amount, admin: dbUser.admin})
+        firebase.db.collection('users').doc(userData.authUser.uid).set({bank:dbUser.bank+amount, admin: dbUser.admin})
     }
 
     function buyItem() {
+        console.log("buying Item");
         firebase.db.collection('items').doc(props.item.id).set({count: amount.current-1, name: name.current, price: unformatted.current}).then(function() {
         console.log("Document successfully written!");
         })
