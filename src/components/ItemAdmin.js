@@ -41,9 +41,9 @@ function Item(props) {
                 {amount.current} Remaining
             </CardContent>
             <CardActions disableSpacing>
-        <Button size="small" color="primary" onClick={() => buyItem()}>
+        {props.admin ? null :<Button size="small" color="primary" onClick={() => buyItem()}>
           Buy
-      </Button>
+      </Button> }
       </CardActions></div>
         </Card>
     );

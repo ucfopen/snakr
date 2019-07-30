@@ -3,6 +3,7 @@ import '../App.css';
 import Main from './Main';
 import Login from './Login';
 import Pantry from './Pantry';
+import Admin from './Admin';
 import  {BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
 import UserContext  from './UserContext';
 import  { FirebaseContext } from './Firebase';
@@ -40,6 +41,7 @@ function App() {
                   <Route path='/' exact component={Main}/>
                   <Route path='/login' component={Login}/>
                   <Route path='/pantry' component={Pantry}/>
+                  <Route path='/admin' component={Admin}/>
               </Switch>
 
           </UserContext.Provider>
