@@ -16,7 +16,6 @@ function Item(props) {
 
     useEffect(() => {
         firebase.db.collection('items').doc(props.item.id).onSnapshot(function(doc) {
-            console.log(doc.data());
             // snapshot.docChanges().forEach(function(doc) {
             //     console.log(doc);
             // })
@@ -34,10 +33,6 @@ function Item(props) {
             console.error("Error writing document: ", error);
         });
     }
-
-    useEffect(() => {
-        console.log(amount);
-    }, [amount]);
 
     return (
         <Card className="item">

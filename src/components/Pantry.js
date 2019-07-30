@@ -13,7 +13,6 @@ function Pantry() {
         firebase.db.collection('items').get().then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
             let item = doc;
-            console.log(doc.data().name);
             itemHolder.push(item);
             });
         })
