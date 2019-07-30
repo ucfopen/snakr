@@ -1,8 +1,6 @@
-import React, {useContext, useState, useEffect} from 'react';
-import Login from './Login';
+import React, {useContext} from 'react';
 import Dashboard from './Dashboard';
 import Welcome from './Welcome';
-import Header from './Header';
 import  UserContext from './UserContext';
 
 function Content() {
@@ -10,7 +8,6 @@ function Content() {
 
     return (
       <div className="content">
-          <Header />
       {
           userData.authUser
               ? <Dashboard />

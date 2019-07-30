@@ -1,6 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
+import 'firebase/firestore';
 
 let config = {
     apiKey: process.env.REACT_APP_FIREBASE_API,
@@ -16,7 +16,7 @@ class Firebase {
     constructor() {
         app.initializeApp(config);
         this.auth = app.auth();
-        // this.db = app.firestore();
+        this.db = app.firestore();
         this.googleProvider = new app.auth.GoogleAuthProvider();
     }
 

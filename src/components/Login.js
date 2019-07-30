@@ -5,9 +5,10 @@ import '../App.css';
 // import  { Link } from 'react-router-dom';
 import Header from './Header';
 import {FirebaseContext} from './Firebase';
-import  UserContext from './UserContext';
+import UserContext from './UserContext';
 import TextField from '@material-ui/core/TextField';
-import GoogleButton from 'react-google-button'
+import GoogleButton from 'react-google-button';
+import {Link} from 'react-router-dom';
 
 function Login() {
     const firebase = useContext(FirebaseContext);
@@ -148,12 +149,12 @@ function Login() {
     )
 
     return (<div className="login">
-    <Header />
+    <Header login="false"/>
         <div className="signin">
 
             {
                 user
-                    ? <Button onClick={signout}>Logout</Button>
+                    ? <Link to='/'><Button>Home</Button></Link>
                     : fields
             }
 

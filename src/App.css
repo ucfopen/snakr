@@ -1,16 +1,25 @@
-.App {
+body {
+    /* margin-top: -16px; */
+    color: white;
+}
+
+.main {
   text-align: center;
+  background-color: #282c34;
+  height: 100vh;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 5vh;
+  min-height: 8vh;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: calc(0.5em + 1vmin);
   color: white;
+  padding-left: 1vw;
+  /* position: relative; */
 }
 
 .content, .login, .signin {
@@ -41,4 +50,89 @@
 
 .welcome {
     text-align: center;
+}
+
+.App-header.big-header {
+    height: 19vh;
+    padding-left: 0;
+}
+
+#big-header {
+    width: 100%;
+    height: 60%;
+    overflow: hidden;
+    -webkit-transform: skewY(6deg);
+    transform: skewY(6deg);
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+    background: linear-gradient(150deg,#53f 40%,#05ABFF 78%,#6214FF 98%);
+    position: absolute;
+    top: -46vh;
+}
+
+.App-header.big-header #site-nav {
+    justify-content: center;
+}
+
+#site-nav {
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1vh;
+    width: 100%;
+}
+
+.pantry {
+    display: flex;
+    flex-direction: column;
+}
+
+.pantry-items {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+ .item {
+    background: white;
+    color: black;
+    /* max-width: 45vw; */
+    padding: 2%;
+    width: 70%;
+    /* font-size: smaller; */
+}
+
+.item>* {
+    font-size: smaller;
+}
+
+.item .MuiTypography-h5 {
+    font-size: 1.2rem;
+}
+
+.item .MuiCardHeader-root {
+    padding: 0;
+}
+
+.MuiCardActions-root {
+    justify-content: flex-end;
+}
+
+.item .MuiCardContent-root {
+    padding: 10px ;
+}
+
+.MuiCard-root {
+    margin: auto;
+}
+
+.item .MuiCardActions-root {
+    padding: 2px;
+}
+
+.item #content {
+    display: flex;
+    justify-content: space-around;
 }

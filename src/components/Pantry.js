@@ -1,28 +1,37 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Header from './Header';
-import Content from './Content';
+import Item from './Item';
 import {FirebaseContext} from './Firebase';
 
 function Pantry() {
 
     const firebase = useContext(FirebaseContext);
+    const [items,addItems] = useState([]);
 
-    function getSnacks() {
-        let snacks = firebase.db.collection('items').get()
-            .forEach(snack => {
-                console.log(snack.data())
+    useEffect(() => {
+        var itemHolder = [];
+        firebase.db.collection('items').get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+            let item = doc;
+            console.log(doc.data().name);
+            itemHolder.push(item);
             });
-
-        return snacks;
-    }
+        })
+        .then(function() {
+            // console.log(itemHolder);
+            addItems(itemHolder)
+        })
+    }, [firebase]);
 
     return (
-        <div className="main">
-            <Header />
             <div className="pantry">
-                {getSnacks()}
+                <h3>Current Items in stock:</h3>
+                <div id="pantry-items">
+                {items ? (items.map(function(item) {
+                    return <Item item={item} key={item.data().name}/>;
+                })) : ""}
+                </div>
             </div>
-        </div>
     );
 }
 
