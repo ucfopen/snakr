@@ -4,6 +4,10 @@ body {
     background-color: #282c34;
 }
 
+a {
+    text-decoration: none;
+}
+
 .main {
   text-align: center;
   background-color: #282c34;
@@ -12,6 +16,7 @@ body {
 
 .App-header {
   background-color: #282c34;
+
   min-height: 8vh;
   display: flex;
   /* flex-direction: column; */
@@ -23,6 +28,10 @@ body {
   /* position: relative; */
 }
 
+.dashboard .App-header, .login .App-header {
+    background: linear-gradient(150deg,#53f 40%,#05d1ff 78%,#8619e4 98%);
+}
+
 .content, .login, .signin {
     height: 92.6vh;
 }
@@ -32,6 +41,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    background: #EEEAEF;
 }
 
 #loginFields, #signupFields {
@@ -66,13 +76,19 @@ body {
     transform: skewY(6deg);
     -webkit-transform-origin: 0;
     transform-origin: 0;
-    background: linear-gradient(150deg,#53f 40%,#05ABFF 78%,#6214FF 98%);
+    background: linear-gradient(150deg,#53f 40%,#05d1ff 78%,#8619e4 98%);
     position: absolute;
     top: -46vh;
 }
 
 .App-header.big-header #site-nav {
     justify-content: center;
+}
+
+.App-header button {
+    margin-left: auto;
+    margin-right: 1%;
+    color: white;
 }
 
 #site-nav {
@@ -146,4 +162,57 @@ header a, header a:visited {
 .signin {
     color: black;
     background-color: white;
+}
+
+a .MuiButton-contained:hover, button.MuiButton-contained:hover {
+    background-color: #8619e4;
+    color: white;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.up .svg-inline--fa {
+    vertical-align: -0.425em;
+}
+
+.down .svg-inline--fa {
+    vertical-align: 0.075em;
+}
+
+#pantry-items .MuiButton-textPrimary {
+    color: #53f;
+}
+
+#pantry-items .MuiButton-root.Mui-disabled {
+    color: rgba(0, 0, 0, 0.26);
+}
+
+@media screen and (min-width: 30em) {
+    #site-nav {
+        margin-top: -8vh;
+    }
+
+    .App-header.big-header {
+        height: 31vh;
+    }
+
+    #loginFields, #signupFields {
+        width: 50vw;
+        margin: 0 auto;
+    }
+
+    #pantry-items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 80%;
+        margin: auto;
+    }
+
+    .item {
+        width: 17%;
+        margin: 1%;
+    }
 }

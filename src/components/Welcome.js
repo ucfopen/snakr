@@ -7,7 +7,7 @@ function Welcome() {
 
     return (
       <div className="welcome">
-        <Header big="true"/>
+        <Header big="true" login="true"/>
         <h2>Tired of looking for a whiteboard marker?</h2>
         <h2>Concerned about what's going on in Zach's square?</h2>
         <h2>Snakr to the rescue</h2>

@@ -48,7 +48,8 @@ function Item(props) {
         });
         updateBank(unformatted.current);
     }
-
+    let disabled = !amount.current;
+    // console.log(disabled);
     return (
         <Card className="item">
             <CardHeader title={name.current} subheader={cost} />
@@ -56,7 +57,7 @@ function Item(props) {
                 {amount.current} Remaining
             </CardContent>
             <CardActions disableSpacing>
-        <Button size="small" color="primary" onClick={() => buyItem()}>
+        <Button disabled={disabled} size="small" color="primary" onClick={() => buyItem()}>
           Buy
       </Button>
       </CardActions></div>

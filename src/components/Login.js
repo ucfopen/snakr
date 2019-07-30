@@ -1,8 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import Button from '@material-ui/core/Button';
 import '../App.css';
-// import Dashboard from './Dashboard';
-// import  { Link } from 'react-router-dom';
 import Header from './Header';
 import {FirebaseContext} from './Firebase';
 import UserContext from './UserContext';
@@ -77,21 +75,12 @@ function Login() {
         });
     };
 
-    // function signout() {
-    //     firebase.doSignOut()
-    // };
-    //
-    // function checkUser(tempUser) {
-    //     if(tempUser !== user) {
-    //         console.log(tempUser);
-    //     }
-    // }
-
     useEffect(() => {
-        firebase.auth.onAuthStateChanged(authUser => {
+        let unsubscribe = firebase.auth.onAuthStateChanged(authUser => {
             // console.log(firebase.auth.currentUser);
             authUser ? setUser(authUser) : setUser(null);
         });
+        return () => unsubscribe();
     }, [firebase.auth])
 
 
@@ -101,83 +90,76 @@ function Login() {
 
     const googleLogin = <GoogleButton type="light" onClick={signin} />;
 
-    const loginFields = (
-        <div id="loginFields">
-        <p>Sign In for Snacks</p>
-        <TextField
-        required
-        fullWidth
-        id="email"
-        label="Email address"
-        className="textfields"
-        onChange={handleChangeIn('email')}
-        margin="normal"
-      />
-        <TextField
-        required
-        fullWidth
-        id="password"
-        label="Password"
-        type="password"
-        autoComplete="current-password"
-        className="textfields"
-        onChange={handleChangeIn('password')}
-        margin="normal"
-      />
-  <Button variant="contained" onClick={() => signinEmail(signinInputs.email,signinInputs.password)}>Sign In</Button>
-      <p>or</p>
-      {googleLogin}
-      </div>
-    )
-
-    const signupFields = (
-        <div id="signupFields">
-        <p>Create an Account</p>
-        <TextField
-        required
-        fullWidth
-        id="signupEmail"
-        label="Email address"
-        className="textfields"
-        onChange={handleChangeUp('email')}
-        margin="normal"
-      />
-        <TextField
-        required
-        fullWidth
-        id="signupPassword"
-        label="Password"
-        type="password"
-        autoComplete="current-password"
-        className="textfields"
-        onChange={handleChangeUp('password')}
-        margin="normal"
-      />
-      <Button variant="contained" onClick={() => signup(signupInputs.email,signupInputs.password)}>Sign Up</Button>
-      <p>or</p>
-      {googleLogin}
-      </div>
-    )
-
     const fields = (
         <div id="fields">
-        {
-            newUser
-                ? signupFields
-                : loginFields
-        }
-        <div id="accountBox">
-        {
-            newUser
-                ? <Button onClick={() => createUser(false)}>Already have an account?</Button>
-                : <Button onClick={() => createUser(true)}>Need to create an account?</Button>
-        }
-        </div>
+            <div id="loginFields" className={newUser ? 'hidden' : ''}>
+                <p>Sign In for Snacks</p>
+                <TextField
+                required
+                fullWidth
+                id="email"
+                label="Email address"
+                className="textfields"
+                defaultValue={signinInputs.password}
+                onChange={handleChangeIn('email')}
+                margin="normal"
+                />
+                <TextField
+                required
+                fullWidth
+                id="password"
+                label="Password"
+                type="password"
+                defaultValue={signinInputs.password}
+                autoComplete="current-password"
+                className="textfields"
+                onChange={handleChangeIn('password')}
+                margin="normal"
+                />
+                <Button variant="contained" onClick={() => signinEmail(signinInputs.email,signinInputs.password)}>Sign In</Button>
+                <p>or</p>
+                {googleLogin}
+            </div>
+            <div id="signupFields" className={newUser ? '' : 'hidden'}>
+                <p>Create an Account</p>
+                <TextField
+                required
+                fullWidth
+                id="signupEmail"
+                defaultValue={signupInputs.email}
+                label="Email address"
+                className="textfields"
+                onChange={handleChangeUp('email')}
+                margin="normal"
+                />
+                <TextField
+                required
+                fullWidth
+                id="signupPassword"
+                label="Password"
+                type="password"
+                defaultValue={signupInputs.password}
+                autoComplete="current-password"
+                className="textfields"
+                onChange={handleChangeUp('password')}
+                margin="normal"
+                />
+                <Button variant="contained" onClick={() => signup(signupInputs.email,signupInputs.password)}>Sign Up</Button>
+                <p>or</p>
+                {googleLogin}
+            </div>
+            <div id="accountBox">
+            {
+                newUser
+                    ? <Button onClick={() => createUser(false)}>Already have an account?</Button>
+                    : <Button onClick={() => createUser(true)}>Need to create an account?</Button>
+            }
+            </div>
         </div>
     )
 
     return (<div className="login">
-    <Header login="false"/>
+    <Header login="true" />
         <div className="signin">
 
             {

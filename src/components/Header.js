@@ -11,19 +11,24 @@ function Header(props) {
     function signout() {
         firebase.doSignOut()
     };
+    let login=false;
+
+    if(props.login) {
+        login = JSON.parse(props.login);
+    }
 
     if(props.big) {
         return (
             <header className="App-header big-header">
                     <div id="site-nav"><Link to='/'><h1>Snakr - The Snack Solution</h1></Link>
-                    <Link to="/login">Login</Link></div>
+                    {login ? '' : <Link to="/login">Login</Link>}</div>
                     <div id="big-header"></div>
           </header>
         );
     } else {
         return (<header className="App-header">
                 <Link to='/'><h1>Snakr - The Snack Solution</h1></Link>
-                {userData.authUser ? <Button onClick={signout}>Logout</Button> : <Link to="/login" >Login</Link>}
+                {userData.authUser ? <Button onClick={signout}>Logout</Button> : (login ? '' : <Link to="/login">Login</Link>)}
       </header>);
     }
 

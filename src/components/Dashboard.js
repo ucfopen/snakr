@@ -35,7 +35,7 @@ function Dashboard() {
     return (
       <div className="dashboard">
           <Header />
-          <header>{name ? <p>Hello {name}</p> : '' }<p>Your balance is ${account.toFixed(2)}</p></header>
+          <header id="dashboardHeader">{name ? <p>Hello {name}</p> : '' }<p>Your balance is ${account.toFixed(2)}</p></header>
           <Pantry />
           {admin ? <Link to='/admin'><Button variant="contained">Admin</Button></Link> : ''}
       </div>
