@@ -35,6 +35,11 @@ function Login() {
     function signin() {
         firebase.doSignInWithGoogle().then(authUser => {
             setUser(authUser.user);
+            if(authUser.additionalUserInfo.isNewUser) {
+                if(firebase) {
+                    firebase.db.collection('users').doc(authUser.user.uid).set({bank:0, admin: false})
+                }
+            }
         }).catch(error => {
             console.log(error);
         });
