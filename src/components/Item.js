@@ -68,10 +68,8 @@ function Item(props) {
     firebase.db
       .collection("items")
       .doc(props.item.id)
-      .set({
+      .update({
         count: amount.current - 1,
-        name: name.current,
-        price: unformatted.current
       })
       .then(function() {
         console.log("Document successfully written!");

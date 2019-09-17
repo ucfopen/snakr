@@ -33,7 +33,7 @@ function Pantry() {
                 <div id="pantry-items" className={hiddenIS ? "hidden" : ""}>
                 {items ? (items.map(function(item) {
                     if(item.data().count > 0) {
-                        return <Item item={item} key={item.data().name}/>;
+                        return <Item item={item} key={item.data().name} />;
                     }
                     return '';
                 })) : ""}
