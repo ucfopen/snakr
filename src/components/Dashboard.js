@@ -20,17 +20,17 @@ function Dashboard() {
                     setAdmin(true);
                 }
             })
-    }, [firebase]);
+    }, [firebase, userData.authUser.uid]);
 
     // const unsubscribe = firebase.firestore().collection('recipes') .doc(id).onSnapshot( doc => { setLoading(false) setRecipe(doc) }, err => { setError(err) } )
 
     useEffect(() => {
+        // console.log(document.hasFocus());
         let unsubscribe = firebase.db.collection('users').doc(userData.authUser.uid).onSnapshot(doc => {
             updateAcc(doc.data().bank);
         }, err => { console.log(err) })
         return () => unsubscribe();
-
-    }, [firebase]);
+    }, [firebase, userData.authUser.uid]);
 
     return (
       <div className="dashboard">

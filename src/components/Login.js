@@ -6,7 +6,7 @@ import {FirebaseContext} from './Firebase';
 import UserContext from './UserContext';
 import TextField from '@material-ui/core/TextField';
 import GoogleButton from 'react-google-button';
-import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 function Login() {
     const firebase = useContext(FirebaseContext);
@@ -164,7 +164,11 @@ function Login() {
 
             {
                 user
-                    ? <Link to='/'><Button>Home</Button></Link>
+                    ? <Redirect
+                            to={{
+                            pathname: "/"
+                          }}
+                        />
                     : fields
             }
 

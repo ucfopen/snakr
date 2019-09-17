@@ -1,7 +1,7 @@
-import React, {useContext,useEffect,useState} from 'react';
+import React from 'react';
 import Header from './Header';
-import {FirebaseContext} from './Firebase';
-import UserContext from './UserContext';
+// import {FirebaseContext} from './Firebase';
+// import UserContext from './UserContext';
 
 
 
@@ -24,10 +24,12 @@ function Admin() {
     // }, [firebase]);
 
     return (
-      <div className="main">
+      <div className="admin">
           <Header />
       </div>
     );
 }
 
 export default Admin;
+
+// , {useContext,useEffect,useState}
