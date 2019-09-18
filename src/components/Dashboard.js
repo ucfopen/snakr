@@ -11,6 +11,7 @@ function Dashboard() {
     const userData = useContext(UserContext);
     const [admin,setAdmin] = useState(false);
     const [account,updateAcc] = useState(0);
+    const [focus, updateFocus] = useState(false);
     const firebase = useContext(FirebaseContext);
     let name = userData.authUser.displayName;
 
@@ -23,9 +24,17 @@ function Dashboard() {
     }, [firebase, userData.authUser.uid]);
 
     // const unsubscribe = firebase.firestore().collection('recipes') .doc(id).onSnapshot( doc => { setLoading(false) setRecipe(doc) }, err => { setError(err) } )
-
+    // useEffect(() => {
+    //     if(focus!== document.hasFocus()) {
+    //         updateFocus(document.hasFocus())
+    //     }
+    //     console.log(focus);
+    // }, [focus])
+    // useEffect(() => {
+    //     console.log("reload")
+    // });
     useEffect(() => {
-        // console.log(document.hasFocus());
+
         let unsubscribe = firebase.db.collection('users').doc(userData.authUser.uid).onSnapshot(doc => {
             updateAcc(doc.data().bank);
         }, err => { console.log(err) })

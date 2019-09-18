@@ -13,27 +13,22 @@ import  { FirebaseContext } from './Firebase';
 function App() {
     const firebase = useContext(FirebaseContext);
       const [user, setUser] = useState('');
-      const [state, setState] = useState({authUser: user, updateUser: userUpdate});
+      const [state, setContext] = useState({authUser: user, updateUser: userUpdate});
 
       //onAuthStateChanged provided by the firebase api creates a listener
       // that updates the authUser object based on any changes
       useEffect(() => {
           firebase.auth.onAuthStateChanged(authUser => {
               authUser
-                  ? setUser(authUser)
-                  : setUser(null);
+                  ? setContext({...state, authUser: authUser})
+                  : setContext(null)
           });
 
       }, [firebase.auth])
-      //When an update to the  user object changes, update the context
-      // to contain the new user data
-      useEffect(() => {
-          setState({...state, authUser: user});
-      }, [user, state])
       //This function is passed to the context provider so that
       // down range children can update the context
       function userUpdate(data) {
-        setState({...state, authUser: data});
+        setContext({...state, authUser: data});
       };
 
       return (

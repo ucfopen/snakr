@@ -18,6 +18,10 @@ function Item(props) {
     const [dbUser, updatedb] = useState({});
 
     useEffect(() => {
+        console.log(props)
+    }, []);
+
+    useEffect(() => {
             let unsubscribe = firebase.db.collection('items').doc(props.item.id).onSnapshot(doc => {
                 // console.log(doc);
                 unformatted.current = doc.data().price;
