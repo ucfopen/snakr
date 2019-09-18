@@ -32,7 +32,7 @@ a {
 }
 
 .dashboard .App-header, .login .App-header {
-    background: linear-gradient(150deg,#53f 40%,#05d1ff 78%,#8619e4 98%);
+    background: linear-gradient(150deg,#53f 40%,#05d1ff 78%,var(--purple) 98%);
 }
 
 .content, .login, .signin {
@@ -95,7 +95,7 @@ a {
     transform: skewY(6deg);
     -webkit-transform-origin: 0;
     transform-origin: 0;
-    background: linear-gradient(150deg,#53f 40%,#05d1ff 78%,#8619e4 98%);
+    background: linear-gradient(150deg,#53f 40%,#05d1ff 78%,var(--purple) 98%);
     position: absolute;
     top: -46vh;
 }
@@ -137,6 +137,7 @@ a {
     /* max-width: 45vw; */
     padding: 2%;
     width: 70%;
+    min-width: 190px;
     /* font-size: smaller; */
 }
 
@@ -206,6 +207,34 @@ a .MuiButton-contained:hover, button.MuiButton-contained:hover {
 
 #pantry-items .MuiButton-root.Mui-disabled {
     color: rgba(0, 0, 0, 0.26);
+}
+
+.add #addingContainer {
+    width: 80%;
+    margin: auto;
+    padding: 1rem;
+    background: var(--light-background);
+    border-radius: 8px;
+}
+
+.add #addingContainer h2 {
+    color: var(--global-background);
+}
+
+#addingContainer h3 {
+    color: var(--global-background);
+    margin: 0;
+}
+
+#addingContainer>div {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+}
+
+#addingContainer .MuiFormControl-root {
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 @media screen and (min-width: 30em) {
