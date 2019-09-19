@@ -15,6 +15,9 @@ function Dashboard() {
     const firebase = useContext(FirebaseContext);
     let name = userData.authUser.displayName;
 
+    useEffect(() => {
+        console.log(userData.authUser.displayName)
+    });
 
     useEffect(() => { firebase.db.collection('users').doc(userData.authUser.uid).get().then(function(querySnapshot) {
                 if(querySnapshot.data().admin) {

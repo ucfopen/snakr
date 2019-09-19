@@ -1,15 +1,19 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Dashboard from './Dashboard';
 import Welcome from './Welcome';
-import  UserContext from './UserContext';
+import UserContext from './UserContext';
 
 function Content() {
     const userData = useContext(UserContext);
 
+    // useEffect(() => {
+    //     console.log(userData);
+    // })
+
     return (
       <div className="content">
       {
-          userData.authUser
+          (userData.authUser)
               ? <Dashboard />
               : <Welcome />
       }

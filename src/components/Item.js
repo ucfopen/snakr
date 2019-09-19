@@ -19,7 +19,7 @@ function Item(props) {
 
     useEffect(() => {
         console.log(props)
-    }, []);
+    });
 
     useEffect(() => {
             let unsubscribe = firebase.db.collection('items').doc(props.item.id).onSnapshot(doc => {
