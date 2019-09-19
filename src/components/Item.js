@@ -17,19 +17,19 @@ function Item(props) {
     const firebase = useContext(FirebaseContext);
     const [dbUser, updatedb] = useState({});
 
-    useEffect(() => {
-        console.log(props)
-    });
+    // useEffect(() => {
+    //     console.log(props.item.data())
+    // });
 
-    useEffect(() => {
-            let unsubscribe = firebase.db.collection('items').doc(props.item.id).onSnapshot(doc => {
-                // console.log(doc);
-                unformatted.current = doc.data().price;
-                name.current = doc.data().name;
-                amount.current = doc.data().count;
-            }, err => { console.log(err) })
-            return () => unsubscribe();
-    }, [firebase, props.item.id]);
+    // useEffect(() => {
+    //         let unsubscribe = firebase.db.collection('items').doc(props.item.id).onSnapshot(doc => {
+    //             // console.log(doc);
+    //             unformatted.current = doc.data().price;
+    //             name.current = doc.data().name;
+    //             amount.current = doc.data().count;
+    //         }, err => { console.log(err) })
+    //         return () => unsubscribe();
+    // }, [firebase, props.item.id]);
 
     useEffect(() => {
         let unsubscribe = firebase.db.collection('users').doc(userData.authUser.uid).onSnapshot(doc => {
@@ -39,7 +39,7 @@ function Item(props) {
 }, [firebase, props.item.id, userData.authUser.uid]);
 
     function updateBank(amount) {
-        firebase.db.collection('users').doc(userData.authUser.uid).set({bank:dbUser.bank+amount, admin: dbUser.admin})
+        firebase.db.collection('users').doc(userData.authUser.uid).update({bank:dbUser.bank+amount})
     }
 
     function buyItem() {

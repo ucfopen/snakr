@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import Dashboard from './Dashboard';
 import Welcome from './Welcome';
 import UserContext from './UserContext';

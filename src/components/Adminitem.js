@@ -6,7 +6,7 @@ import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { FirebaseContext } from "./Firebase";
-import UserContext from "./UserContext";
+// import UserContext from "./UserContext";
 
 function Item(props) {
   const name = useRef(props.item.data().name);
@@ -21,23 +21,21 @@ function Item(props) {
     [userAmount, props.item]
   );
   const firebase = useContext(FirebaseContext);
-  const [dbUser, updatedb] = useState({});
-  // console.log(props.item.data());
 
   function buyItem(amount) {
       // https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#update
-      // firebase.db
-      //   .collection("items")
-      //   .doc(props.item.id)
-      //   .update({
-      //     count: amount,
-      //   })
-      //   .then(function() {
-      //     console.log("Document successfully written!");
-      //   })
-      //   .catch(function(error) {
-      //     console.error("Error writing document: ", error);
-      //   });
+      firebase.db
+        .collection("items")
+        .doc(props.item.id)
+        .update({
+          count: amount,
+        })
+        .then(function() {
+          console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+          console.error("Error writing document: ", error);
+        });
       console.log(amount);
   }
   let input = null;

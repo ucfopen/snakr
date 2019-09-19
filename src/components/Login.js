@@ -33,7 +33,7 @@ function Login() {
     firebase
       .doSignInWithGoogle()
       .then(authUser => {
-        userData.userUpdate(authUser.user);
+        // userData.userUpdate(authUser.user);
         if (authUser.additionalUserInfo.isNewUser) {
           if (firebase) {
             firebase.db
@@ -196,7 +196,7 @@ function Login() {
     <div className="login">
       <Header login="true" />
       <div className="signin">{
-          userData ? (
+          userData.authUser ? (
         <Redirect
           to={{
             pathname: "/"

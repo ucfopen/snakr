@@ -2,8 +2,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import UserContext from './UserContext';
 import Pantry from './Pantry';
 import Header from './Header';
-
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {FirebaseContext} from './Firebase';
 import Button from '@material-ui/core/Button';
 
@@ -15,9 +14,9 @@ function Dashboard() {
     const firebase = useContext(FirebaseContext);
     let name = userData.authUser.displayName;
 
-    useEffect(() => {
-        console.log(userData.authUser.displayName)
-    });
+    // useEffect(() => {
+    //     console.log(userData.authUser.displayName)
+    // });
 
     useEffect(() => { firebase.db.collection('users').doc(userData.authUser.uid).get().then(function(querySnapshot) {
                 if(querySnapshot.data().admin) {
@@ -36,14 +35,21 @@ function Dashboard() {
     // useEffect(() => {
     //     console.log("reload")
     // });
-    useEffect(() => {
 
+    //Get User bank data
+    useEffect(() => {
         let unsubscribe = firebase.db.collection('users').doc(userData.authUser.uid).onSnapshot(doc => {
             updateAcc(doc.data().bank);
         }, err => { console.log(err) })
         return () => unsubscribe();
     }, [firebase, userData.authUser.uid]);
-
+    if(!userData.authUser) {
+        return <Redirect
+          to={{
+            pathname: "/"
+          }}
+        />
+    } else {
     return (
       <div className="dashboard">
           <Header />
@@ -52,6 +58,7 @@ function Dashboard() {
           {admin ? <Link to='/admin'><Button variant="contained">Admin</Button></Link> : ''}
       </div>
     );
+}
 }
 
 export default Dashboard;
