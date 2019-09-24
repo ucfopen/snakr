@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import '../App.css';
 import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
@@ -28,10 +28,38 @@ function Header(props) {
           </header>
         );
     } else {
-        return (<header className="App-header">
-                <Link to='/'><h1>Snakr - The Snack Solution</h1></Link>
-                {userData && userData.authUser ? <Button onClick={signout}>Logout</Button> : (login ? '' : <Link to="/login">Login</Link>)}
-      </header>);
+        return (
+    <header className="App-header">
+        <div id="desktop">
+            <Link to='/'><h1>Snakr - The Snack Solution</h1></Link>
+            {userData && userData.authUser ? <Button onClick={signout}>Logout</Button> : (login ? '' : <Link to="/login"><Button>Login</Button></Link>)}
+        </div>
+        <div id="mobile">
+            <input type="checkbox" id="nav-checkbox" />
+            <label htmlFor="nav-checkbox" className="checkbox-label">
+               <span className="menu-line"></span>
+           </label>
+           <nav className="nav">
+	<h1 className="nav__title" id="title">Snakr</h1>
+
+	<ul className="nav__ul nav-links">
+		<li className="nav__li">
+			<Button><Link to="/" className="nav__link">Dashboard</Link></Button>
+		</li>
+		<li className="nav__li">
+			<Button><Link to="/" className="nav__link">Home</Link></Button>
+		</li>
+		<li className="nav__li">
+			<Button><Link to="/" className="nav__link">Home</Link></Button>
+		</li>
+		<li className="nav__li">
+			<Button><Link to="/" className="nav__link">Home</Link></Button>
+		</li>
+	</ul>
+	<p className="nav__copyright">&copy; 2019, csspoints.</p>
+</nav>
+       </div>
+    </header>);
     }
 
 }

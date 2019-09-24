@@ -17,9 +17,7 @@ a {
   height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-
+.App-header #desktop {
   min-height: 8vh;
   display: flex;
   /* flex-direction: column; */
@@ -29,6 +27,165 @@ a {
   color: white;
   padding-left: 1vw;
   /* position: relative; */
+}
+
+#nav-checkbox {
+	position: absolute;
+	top: -100%;
+	left: -100%;
+	z-index: -1;
+	opacity: 0;
+}
+.checkbox-label {
+	--br: 0;
+	--transform--before: translateY(-.9rem);
+	--transform--after: translateY(.9rem);
+	display: flex;
+	width: 5.4rem;
+	height: 5.4rem;
+	border-radius: 100rem;
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	cursor: pointer;
+	transition: .4s;
+}
+.checkbox-label::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: inherit;
+	height: inherit;
+	border-left: 1px solid var(--light-background);
+	opacity: .2;
+}
+
+#nav-checkbox:hover+.checkbox-label, #nav-checkbox:focus+.checkbox-label {
+	--color-1: var(--purple);
+	--color-2: var(--purple);
+}
+.menu-line {
+	width: 3rem;
+	height: .2rem;
+	background: var(--color-1, var(--light-background));
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: all .3s;
+}
+.menu-line::before, .menu-line::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: inherit;
+	background: var(--color-2, var(--light-background));
+	transition: inherit;
+}
+.menu-line::before {
+	width: var(--width, calc(100% / 2));
+	transform: var(--transform--before);
+}
+.menu-line::after {
+	width: var(--width, calc(100% / 3));
+	transform: var(--transform--after);
+}
+#nav-checkbox:checked+.checkbox-label {
+	--color-1: transparent;
+	--width: 100%;
+	--transform--before: rotate(calc(45deg));
+	--transform--after: rotate(-45deg);
+	left: 20rem;
+}
+
+/* Nav menu */
+
+.nav {
+	--o: 0;
+	--ty: translateY(2rem);
+	--tx: translateX(-6rem);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 19rem;
+    width: 68%;
+	height: 100%;
+	visibility: hidden;
+	background: var(--global-background);
+	box-shadow: .4rem 0 2.4rem .2rem hsla(0, 0%, 0%, 0.2);
+	transform: translateX(-100%);
+	transition: .4s;
+}
+#nav-checkbox:checked~.nav {
+	--o: 1;
+	--ty: translateY(0);
+	--tx: translateX(0);
+	transform: translateX(0);
+	visibility: visible;
+}
+nav #title {
+	font-size: 3.2rem;
+	font-weight: normal;
+	opacity: var(--o);
+	transform: var(--ty);
+	transition: .3s .2s;
+}
+.nav__ul, .nav-links {
+	width: 100%;
+	margin: 4rem 0;
+	list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.nav__li, .nav-link {
+	opacity: var(--o);
+	transition: var(--n) .2s;
+	transform: var(--tx);
+	text-align: center;
+	padding: 1rem 0;
+
+	position: relative;
+}
+.nav__link, nav a {
+	color: inherit;
+	font-size: 1.6rem;
+	transition: .4s;
+    cursor: pointer;
+}
+.nav__link::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	border-radius: .2rem;
+	background: var(--global-background);
+	opacity: 0;
+	transition: inherit;
+	transform: translateX(-1rem);
+}
+.nav__link:hover, .nav__link:focus {
+	padding-left: .4rem;
+	color: var(--light-2);
+}
+.nav__link:hover::before, .nav__link:focus::before {
+	opacity: .4;
+	transform: translateX(0);
+}
+.nav__copyright {
+	font-size: 1.2rem;
+	transform: var(--tx);
+	transition: .3s .2s;
 }
 
 .dashboard .App-header, .login .App-header {
@@ -262,5 +419,11 @@ a .MuiButton-contained:hover, button.MuiButton-contained:hover {
     .item {
         width: 17%;
         margin: 1%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #desktop {
+        display: none !important;
     }
 }

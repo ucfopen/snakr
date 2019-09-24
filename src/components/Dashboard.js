@@ -10,7 +10,7 @@ function Dashboard() {
     const userData = useContext(UserContext);
     const [admin,setAdmin] = useState(false);
     const [account,updateAcc] = useState(0);
-    const [focus, updateFocus] = useState(false);
+    // const [focus, updateFocus] = useState(false);
     const firebase = useContext(FirebaseContext);
     let name = userData.authUser.displayName;
 

@@ -22,6 +22,10 @@ function Item(props) {
   );
   const firebase = useContext(FirebaseContext);
 
+  const handleChange = name => event => {
+    updateAmount(event.target.value);
+  };
+
   function buyItem(amount) {
       // https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#update
       firebase.db
@@ -44,8 +48,7 @@ function Item(props) {
         id="outlined-number"
         label="Amount"
         value={userAmount}
-        onChange={e =>
-                  updateAmount((amount) => ( e.target.value ))}
+        onChange={handleChange('amount')}
         type="number"
         margin="dense"
       />

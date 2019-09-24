@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Button from "@material-ui/core/Button";
 import "../App.css";
 import Header from "./Header";

@@ -2,8 +2,8 @@ import React from "react";
 import Header from "./Header";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { FirebaseContext } from "./Firebase";
-import UserContext from "./UserContext";
+// import { FirebaseContext } from "./Firebase";
+// import UserContext from "./UserContext";
 
 function Additem() {
   // const [userAmount, updateAmount] = useState(1);
@@ -11,7 +11,7 @@ function Additem() {
   // const [dbUser, updatedb] = useState({});
   // console.log(props.item.data());
 
-  function addItem() {
+  // function addItem() {
       // https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#update
       // firebase.db
       //   .collection("items")
@@ -26,7 +26,7 @@ function Additem() {
       //     console.error("Error writing document: ", error);
       //   });
       // console.log(amount);
-  }
+  // }
 
   return (
       <div className="main">

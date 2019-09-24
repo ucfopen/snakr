@@ -29,7 +29,7 @@ function App() {
     () => {
       firebase.auth.onAuthStateChanged(authUser => {
           if(authUser && authUser !== user.authUser) {
-              console.log(authUser);
+              // console.log(authUser);
               setUser({ ...user, authUser: authUser });
           }
           if(!authUser && user.authUser) {
