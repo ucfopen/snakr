@@ -14,7 +14,8 @@ a {
 .main {
   text-align: center;
   background-color: #282c34;
-  height: 100vh;
+  height: 100%;
+  padding-bottom: 5vh;
 }
 
 .App-header #desktop {
@@ -137,6 +138,7 @@ nav #title {
 	opacity: var(--o);
 	transform: var(--ty);
 	transition: .3s .2s;
+    margin-bottom: 0;
 }
 .nav__ul, .nav-links {
 	width: 100%;
@@ -310,6 +312,11 @@ nav #title {
     padding: 0;
 }
 
+.item .MuiCardHeader-content {
+    display: flex;
+    justify-content: space-around;
+}
+
 .MuiCardActions-root {
     justify-content: flex-end;
 }
@@ -420,10 +427,22 @@ a .MuiButton-contained:hover, button.MuiButton-contained:hover {
         width: 17%;
         margin: 1%;
     }
+
+    #mobile {
+        display: none;
+    }
+
+    #desktop nav a {
+        font-size: 0.875rem;
+    }
 }
 
 @media screen and (max-width: 500px) {
     #desktop {
         display: none !important;
+    }
+
+    .App-header {
+        padding-top: 5vh;
     }
 }

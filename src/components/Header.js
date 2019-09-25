@@ -9,6 +9,17 @@ function Header(props) {
     const firebase = useContext(FirebaseContext);
     const userData = useContext(UserContext);
 
+    let navLinks = (
+        <ul className="nav__ul nav-links">
+    		<li className="nav__li">
+    			<Button><Link to="/" className="nav__link">Dashboard</Link></Button>
+    		</li>
+    		<li className="nav__li">
+    			<Button><Link to="/" className="nav__link">User Profile</Link></Button>
+    		</li>
+    	</ul>
+    );
+
     function signout() {
         firebase.doSignOut()
     };
@@ -18,6 +29,25 @@ function Header(props) {
         login = JSON.parse(props.login);
     }
 
+
+
+    if(userData.admin) {
+        navLinks = <ul className="nav__ul nav-links">
+    		<li className="nav__li">
+    			<Button><Link to="/" className="nav__link">Dashboard</Link></Button>
+    		</li>
+            <li className="nav__li">
+    			<Button><Link to="/" className="nav__link">Profile</Link></Button>
+    		</li>
+    		<li className="nav__li">
+    			<Button><Link to="/admin" className="nav__link">Admin</Link></Button>
+    		</li>
+    		<li className="nav__li">
+    			<Button><Link to="/" className="nav__link">Users</Link></Button>
+    		</li>
+            {userData && userData.authUser ? <li><Button onClick={signout}>Logout</Button></li> : (login ? '' : <Link to="/login"><Button>Login</Button></Link>)}
+    	</ul>;
+    }
 
     if(props.big) {
         return (
@@ -32,7 +62,9 @@ function Header(props) {
     <header className="App-header">
         <div id="desktop">
             <Link to='/'><h1>Snakr - The Snack Solution</h1></Link>
-            {userData && userData.authUser ? <Button onClick={signout}>Logout</Button> : (login ? '' : <Link to="/login"><Button>Login</Button></Link>)}
+            <nav>
+            {navLinks}
+            </nav>
         </div>
         <div id="mobile">
             <input type="checkbox" id="nav-checkbox" />
@@ -42,21 +74,8 @@ function Header(props) {
            <nav className="nav">
 	<h1 className="nav__title" id="title">Snakr</h1>
 
-	<ul className="nav__ul nav-links">
-		<li className="nav__li">
-			<Button><Link to="/" className="nav__link">Dashboard</Link></Button>
-		</li>
-		<li className="nav__li">
-			<Button><Link to="/" className="nav__link">Home</Link></Button>
-		</li>
-		<li className="nav__li">
-			<Button><Link to="/" className="nav__link">Home</Link></Button>
-		</li>
-		<li className="nav__li">
-			<Button><Link to="/" className="nav__link">Home</Link></Button>
-		</li>
-	</ul>
-	<p className="nav__copyright">&copy; 2019, csspoints.</p>
+	{navLinks}
+	<p className="nav__copyright">Created by Alyssa Davis</p>
 </nav>
        </div>
     </header>);
