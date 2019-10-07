@@ -1,15 +1,19 @@
-import React from 'react';
-import Content from './Content';
+import React, {useContext} from "react";
+import Content from "./Content";
+// import Dashboard from "./Dashboard";
+import Header from './Header';
+import Welcome from "./Welcome";
+import UserContext from "./UserContext";
 
 function Main() {
-  return (
-      <div className="main">
-      <Content />
+      const userData = useContext(UserContext);
 
+  return (
+    <div className="main">
+    <Header />
+        {userData.authUser ? <Content /> : <Welcome />}
     </div>
   );
 }
 
 export default Main;
-
-//

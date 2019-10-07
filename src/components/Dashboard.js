@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import UserContext from './UserContext';
 import Pantry from './Pantry';
-import Header from './Header';
+// import Header from './Header';
 import { Link, Redirect } from "react-router-dom";
 import {FirebaseContext} from './Firebase';
 import Button from '@material-ui/core/Button';
@@ -52,7 +52,6 @@ function Dashboard() {
     } else {
     return (
       <div className="dashboard">
-          <Header />
           <header id="dashboardHeader">{name ? <p>Hello {name}</p> : '' }<p>Your balance is ${account.toFixed(2)}</p></header>
           <Pantry />
           {admin ? <Link to='/admin'><Button variant="contained">Admin</Button></Link> : ''}

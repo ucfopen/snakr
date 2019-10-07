@@ -12,14 +12,11 @@ function Item(props) {
   const name = useRef(props.item.data().name);
   const [userAmount, updateAmount] = useState(1);
   let amount = useRef(props.item.data().size);
-  useEffect(
-    () => {
-        if(!props.item.data().size) {
-            amount.current = userAmount;
-        }
-    },
-    [userAmount, props.item]
-  );
+  useEffect(() => {
+    if (!props.item.data().size) {
+      amount.current = userAmount;
+    }
+  }, [userAmount, props.item]);
   const firebase = useContext(FirebaseContext);
 
   const handleChange = name => event => {
@@ -27,39 +24,40 @@ function Item(props) {
   };
 
   function buyItem(amount) {
-      // https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#update
-      firebase.db
-        .collection("items")
-        .doc(props.item.id)
-        .update({
-          count: amount,
-        })
-        .then(function() {
-          console.log("Document successfully written!");
-        })
-        .catch(function(error) {
-          console.error("Error writing document: ", error);
-        });
-      console.log(amount);
+    // https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#update
+    firebase.db
+      .collection("items")
+      .doc(props.item.id)
+      .update({
+        count: amount
+      })
+      .then(function() {
+        console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
+    console.log(amount);
   }
   let input = null;
-  if(props.type==="can") {
-      input = <TextField
+  if (props.type === "can") {
+    input = (
+      <TextField
         id="outlined-number"
         label="Amount"
         value={userAmount}
-        onChange={handleChange('amount')}
+        onChange={handleChange("amount")}
         type="number"
         margin="dense"
       />
+    );
   }
 
   return (
     <Card className="item">
-      <CardHeader title={name.current}/>
+      <CardHeader title={name.current} />
       <div id="content">
-
-        <CardContent>{ input ? input : "Count: "+amount.current  }</CardContent>
+        <CardContent>{input ? input : "Count: " + amount.current}</CardContent>
         <CardActions disableSpacing>
           <Button
             size="small"

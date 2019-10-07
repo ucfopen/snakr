@@ -1,24 +1,26 @@
-import React, {useContext} from 'react';
-import Dashboard from './Dashboard';
-import Welcome from './Welcome';
-import UserContext from './UserContext';
+import React from "react";
+import Dashboard from "./Dashboard";
+// import Welcome from "./Welcome";
+// import UserContext from "./UserContext";
+import Admin from "./Admin";
+import Additem from "./Additem";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function Content() {
-    const userData = useContext(UserContext);
 
-    // useEffect(() => {
-    //     console.log(userData);
-    // })
+  // useEffect(() => {
+  //     console.log(userData);
+  // })
 
-    return (
-      <div className="content">
-      {
-          (userData.authUser)
-              ? <Dashboard />
-              : <Welcome />
-      }
-      </div>
-    );
+  return (
+      <Router>
+          <Switch>
+            <Route path="/" exact component={Dashboard} />
+            <Route path="/admin" exact component={Admin} />
+            <Route path="/add" exact component={Additem} />
+          </Switch>
+      </Router>
+  );
 }
 
 export default Content;

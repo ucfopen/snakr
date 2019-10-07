@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import Header from "./Header";
+// import Header from "./Header";
 import Item from "./Adminitem";
 import { FirebaseContext } from "./Firebase";
 // import UserContext from "./UserContext";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 
 function Admin() {
@@ -52,11 +52,11 @@ function Admin() {
   //   [boxes]
   // );
   return (
-    <div className="main">
       <div className="admin">
-        <Header />
-        <Link to='/add'><Button variant="contained">Add New Item</Button></Link>
-        <div id="newItem" className={newItem ? 'hidden' : ''}></div>
+        <Link to="/add">
+          <Button variant="contained">Add New Item</Button>
+        </Link>
+        <div id="newItem" className={newItem ? "hidden" : ""}></div>
         <div className="pantry">
           <h2>Add a Case</h2>
           <div id="pantry-items">
@@ -75,9 +75,7 @@ function Admin() {
               : ""}
           </div>
         </div>
-
       </div>
-    </div>
   );
 }
 

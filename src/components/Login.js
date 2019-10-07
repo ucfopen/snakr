@@ -195,17 +195,17 @@ function Login() {
   return (
     <div className="login">
       <Header login="true" />
-      <div className="signin">{
-          userData.authUser ? (
-        <Redirect
-          to={{
-            pathname: "/"
-          }}
-        />
-      ) : (
-        fields
-      )
-      }</div>
+      <div className="signin">
+        {userData.authUser ? (
+          <Redirect
+            to={{
+              pathname: "/dashboard"
+            }}
+          />
+        ) : (
+          fields
+        )}
+      </div>
     </div>
   );
 }
