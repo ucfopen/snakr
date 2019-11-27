@@ -53,8 +53,8 @@ function App() {
     <Router>
       <UserContext.Provider value={user}>
         <Switch>
-          <Route path="/" component={Main} />
           <Route path="/login" exact component={Login} />
+          <Route path="/" component={Main} />
         </Switch>
       </UserContext.Provider>
     </Router>

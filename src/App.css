@@ -183,10 +183,10 @@ nav #title {
 	transition: inherit;
 	transform: translateX(-1rem);
 }
-.nav__link:hover, .nav__link:focus {
+/* div:not(#desktop) .nav__link:hover, .nav__link:focus {
 	padding-left: .4rem;
 	color: var(--light-2);
-}
+} */
 .nav__link:hover::before, .nav__link:focus::before {
 	opacity: .4;
 	transform: translateX(0);
@@ -197,7 +197,7 @@ nav #title {
 	transition: .3s .2s;
 }
 
-header.App-header, header.App-header {
+header.App-header #desktop, header.App-header #desktop {
     background: linear-gradient(150deg,#53f 40%,#05d1ff 78%,var(--purple) 98%);
 }
 
@@ -276,6 +276,35 @@ header.App-header, header.App-header {
     color: white;
 }
 
+.container>div {
+    width: 80%;
+    /* margin-top: 2%; */
+    margin: 2% auto;
+}
+
+.container .MuiFormLabel-root {
+    color: rgba(255, 255, 255, 0.54);
+}
+.container .MuiInput-underline:before {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+}
+
+.container .MuiInputBase-input {
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.container .MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.87)
+}
+
+.container .MuiFormLabel-root.Mui-focused {
+    color: #6357ec;
+}
+
+.container .MuiInput-underline:after {
+    border-bottom: 2px solid #6357ec;
+}
+
 #site-nav {
     z-index: 1;
     display: flex;
@@ -322,6 +351,7 @@ header.App-header, header.App-header {
 .item .MuiCardHeader-content {
     display: flex;
     justify-content: space-around;
+    align-items: baseline;
 }
 
 .MuiCardActions-root {

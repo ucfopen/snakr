@@ -39,7 +39,7 @@ function Login() {
             firebase.db
               .collection("users")
               .doc(authUser.user.uid)
-              .set({ bank: 0, admin: false });
+              .set({ bank: 0, admin: false, name: authUser.displayName });
           }
         }
       })
@@ -51,9 +51,6 @@ function Login() {
   function signinEmail(email, pass) {
     firebase
       .doSignInWithEmailAndPassword(email, pass)
-      // .then(authUser => {
-      //   userData.updateUser(authUser.user);
-      // })
       .catch(error => {
         console.log(error);
       });
@@ -63,50 +60,19 @@ function Login() {
     firebase
       .doCreateUserWithEmailAndPassword(email, pass)
       .then(authUser => {
-        console.log(userData);
-        console.log(authUser);
         if (authUser.additionalUserInfo.isNewUser) {
           if (firebase) {
             firebase.db
               .collection("users")
               .doc(authUser.user.uid)
-              .set({ bank: 0, admin: false });
+              .set({ bank: 0, admin: false, name: '' });
           }
-
-          // // firebase.db.collection('users').doc(userData.authUser.uid).set({bank:dbUser.bank-amount, admin: dbUser.admin})
-          // console.log("new user! sweet!");
-          // firebase.doProfileUpdate({displayName:signupFields.displayName}).then(function() {
-          //     console.log("update");
-          //     checkUser(firebase.auth.currentUser);
-          //     // console.log("update");
-          // }).catch(function(error) {
-          //     console.log(error);
-          // });
         }
-        // userData.updateUser(authUser.user);
       })
       .catch(error => {
         console.log(error);
       });
   }
-
-  // useEffect(
-  //   () => {
-  //     let unsubscribe = firebase.auth.onAuthStateChanged(authUser => {
-  //       // console.log(firebase.auth.currentUser);
-  //       authUser? userData.updateUser(authUser) : userData.updateUser(null);
-  //       // console.log(authUser)
-  //     });
-  //     return () => unsubscribe();
-  //   }
-  // );
-
-  // useEffect(
-  //   () => {
-  //     userData.updateUser({ authUser: user });
-  //   },
-  //   [user, userData]
-  // );
 
   const googleLogin = <GoogleButton type="light" onClick={signin} />;
 
@@ -199,7 +165,7 @@ function Login() {
         {userData.authUser ? (
           <Redirect
             to={{
-              pathname: "/dashboard"
+              pathname: "/"
             }}
           />
         ) : (

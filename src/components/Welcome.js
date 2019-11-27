@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Header";
+// import Header from "./Header";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import snaky from "../images/snaky.svg";
@@ -7,7 +7,14 @@ import snaky from "../images/snaky.svg";
 function Welcome() {
   return (
     <div className="welcome">
-      <Header big="true" login="true" />
+    <header className="big-header">
+      <div id="site-nav">
+        <Link to="/">
+          <h1>Snakr - The Snack Solution</h1>
+        </Link>
+      </div>
+      <div id="big-header"></div>
+    </header>
       <div id="content">
         <img src={snaky} alt="Snaky the Snakr mascot" />
         <h2>Tired of looking for a whiteboard marker?</h2>

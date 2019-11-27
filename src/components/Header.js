@@ -40,7 +40,7 @@ function Header(props) {
         </li>
         <li className="nav__li">
           <Button>
-            <Link to="/" className="nav__link">
+            <Link to="/profile" className="nav__link">
               Profile
             </Link>
           </Button>
@@ -76,7 +76,7 @@ function Header(props) {
         </li>
         <li className="nav__li">
           <Button>
-            <Link to="/" className="nav__link">
+            <Link to="/profile" className="nav__link">
               Profile
             </Link>
           </Button>

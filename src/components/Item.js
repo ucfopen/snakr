@@ -31,20 +31,23 @@ function Item(props) {
   //         return () => unsubscribe();
   // }, [firebase, props.item.id]);
 
-  useEffect(() => {
-    let unsubscribe = firebase.db
-      .collection("users")
-      .doc(userData.authUser.uid)
-      .onSnapshot(
-        doc => {
-          updatedb(doc.data());
-        },
-        err => {
-          console.log(err);
-        }
-      );
-    return () => unsubscribe();
-  }, [firebase, props.item.id, userData.authUser.uid]);
+  useEffect(
+    () => {
+      let unsubscribe = firebase.db
+        .collection("users")
+        .doc(userData.authUser.uid)
+        .onSnapshot(
+          doc => {
+            updatedb(doc.data());
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      return () => unsubscribe();
+    },
+    [firebase, props.item.id, userData.authUser.uid]
+  );
 
   function updateBank(amount) {
     firebase.db
