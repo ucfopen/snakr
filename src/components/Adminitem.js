@@ -6,28 +6,31 @@ import CardActions from "@material-ui/core/CardActions";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { FirebaseContext } from "./Firebase";
+
 // import UserContext from "./UserContext";
 
 function Item(props) {
   const name = useRef(props.item.data().name);
   const [userAmount, updateAmount] = useState(1);
   let amount = useRef(props.item.data().size);
+
   useEffect(() => {
     if (!props.item.data().size) {
       amount.current = userAmount;
     }
   }, [userAmount, props.item]);
+
   const firebase = useContext(FirebaseContext);
 
   const handleChange = name => event => {
     updateAmount(event.target.value);
   };
 
-  function buyItem(amount) {
+  function addItem(amount) {
     // https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#update
     firebase.db
       .collection("items")
-      .doc(props.item.id)
+      .doc(props.item.data().item)
       .update({
         count: amount
       })
@@ -37,8 +40,8 @@ function Item(props) {
       .catch(function(error) {
         console.error("Error writing document: ", error);
       });
-    console.log(amount);
   }
+
   let input = null;
   if (props.type === "can") {
     input = (
@@ -62,7 +65,7 @@ function Item(props) {
           <Button
             size="small"
             color="primary"
-            onClick={() => buyItem(amount.current)}
+            onClick={() => addItem(amount.current)}
           >
             Add
           </Button>

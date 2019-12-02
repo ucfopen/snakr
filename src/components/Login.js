@@ -12,11 +12,11 @@ function Login() {
   const firebase = useContext(FirebaseContext);
   const userData = useContext(UserContext);
   const [newUser, createUser] = useState(false);
-  const [signinInputs, setSignin] = React.useState({
+  const [signinInputs, setSignin] = useState({
     email: "",
     password: ""
   });
-  const [signupInputs, setSignup] = React.useState({
+  const [signupInputs, setSignup] = useState({
     email: "",
     password: "",
     displayName: ""

@@ -1,37 +1,85 @@
-import React from "react";
-import Header from "./Header";
+import React, { useContext, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-// import { FirebaseContext } from "./Firebase";
-// import UserContext from "./UserContext";
+import { FirebaseContext } from "./Firebase";
 
-function Additem() {
-  // const [userAmount, updateAmount] = useState(1);
-  // const firebase = useContext(FirebaseContext);
-  // const [dbUser, updatedb] = useState({});
-  // console.log(props.item.data());
+function Additem(props) {
+  const firebase = useContext(FirebaseContext);
+  const [itemVals, updateItem] = useState({
+    name: "",
+    upcI: "",
+    price: 0.5,
+    upcC: "",
+    amount: 36
+  });
 
-  // function addItem() {
-  // https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#update
-  // firebase.db
-  //   .collection("items")
-  //   .doc(props.item.id)
-  //   .update({
-  //     count: amount,
-  //   })
-  //   .then(function() {
-  //     console.log("Document successfully written!");
-  //   })
-  //   .catch(function(error) {
-  //     console.error("Error writing document: ", error);
-  //   });
-  // console.log(amount);
-  // }
+  const handleChangeIn = name => event => {
+    updateItem({ ...itemVals, [name]: event.target.value });
+  };
+
+  function addItem() {
+    //firebase.google.com/docs/reference/js/firebase.database.Reference.html#update
+    if(itemVals.name) {
+        if(itemVals.upcC) {
+            console.log("Adding a case");
+            firebase.db
+              .collection("boxes")
+              .doc(itemVals.upcC)
+              .set({
+                item: itemVals.upcI,
+                name: itemVals.name,
+                size: itemVals.amount
+              })
+              .then(function() {
+                console.log("Document successfully written!");
+              })
+              .catch(function(error) {
+                console.error("Error writing document: ", error);
+              });
+              firebase.db
+                .collection("items")
+                .doc(itemVals.upcI)
+                .set({
+                  count: itemVals.amount,
+                  name: itemVals.name,
+                  price: itemVals.price
+                })
+                .then(function() {
+                  console.log("Document successfully written!");
+                })
+                .catch(function(error) {
+                  console.error("Error writing document: ", error);
+                });
+        } else {
+            firebase.db
+              .collection("items")
+              .doc(itemVals.upcI)
+              .set({
+                count: 1,
+                name: itemVals.name,
+                price: itemVals.price
+              })
+              .then(function() {
+                console.log("Document successfully written!");
+              })
+              .catch(function(error) {
+                console.error("Error writing document: ", error);
+              });
+        }
+        updateItem({
+          name: "",
+          upcI: "",
+          price: 0.5,
+          upcC: "",
+          amount: 36
+      });
+    }
+
+  }
 
   return (
     <div className="main">
       <div className="add">
-        <Header />
         <div id="addingContainer">
           <h2>
             Complete all fields if you are adding a case, if adding a single
@@ -39,16 +87,25 @@ function Additem() {
           </h2>
           <div id="single">
             <h3>Item:</h3>
-            <TextField id="productName" label="Product Name" margin="normal" />
+            <TextField
+              id="productName"
+              label="Product Name"
+              margin="normal"
+              value={itemVals.name}
+              onChange={handleChangeIn("name")}
+            />
             <TextField
               id="productUPC"
               label="Single item UPC"
-              type="number"
+              value={itemVals.upcI}
+              onChange={handleChangeIn("upcI")}
               margin="normal"
             />
             <TextField
               id="productPrice"
               label="Price per item"
+              value={itemVals.price}
+              onChange={handleChangeIn("price")}
               type="number"
               margin="normal"
             />
@@ -58,18 +115,21 @@ function Additem() {
             <TextField
               id="caseUPC"
               label="Case UPC"
-              type="number"
+              value={itemVals.upcC}
+              onChange={handleChangeIn("upcC")}
               margin="normal"
             />
             <TextField
               id="caseAmount"
               label="Case amount"
+              value={itemVals.amount}
+              onChange={handleChangeIn("amount")}
               type="number"
               margin="normal"
             />
           </div>
 
-          <Button variant="contained">Add Item</Button>
+          <Button variant="contained" onClick={() => addItem()}>Add Item</Button>
         </div>
       </div>
     </div>
@@ -77,3 +137,5 @@ function Additem() {
 }
 
 export default Additem;
+
+//

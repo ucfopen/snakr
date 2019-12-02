@@ -12,60 +12,57 @@ function Item(props) {
   const userData = useContext(UserContext);
   const price = useRef(props.item.data().price);
   const name = useRef(props.item.data().name);
-  const amount = useRef(props.item.data().count);
+  const [amount, updateAmount] = useState(props.item.data().count);
   let cost = "$" + price.current.toFixed(2);
   const firebase = useContext(FirebaseContext);
   const [dbUser, updatedb] = useState({});
 
-  // useEffect(() => {
-  //     console.log(props.item.data())
-  // });
 
-  // useEffect(() => {
-  //         let unsubscribe = firebase.db.collection('items').doc(props.item.id).onSnapshot(doc => {
-  //             // console.log(doc);
-  //             unformatted.current = doc.data().price;
-  //             name.current = doc.data().name;
-  //             amount.current = doc.data().count;
-  //         }, err => { console.log(err) })
-  //         return () => unsubscribe();
-  // }, [firebase, props.item.id]);
+  useEffect(() => {
+    let unsubscribe = firebase.db
+      .collection("users")
+      .doc(userData.authUser.uid)
+      .onSnapshot(
+        doc => {
+          updatedb(doc.data().bank);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    return () => unsubscribe();
+  }, [firebase, userData.authUser.uid]);
 
-  useEffect(
-    () => {
-      let unsubscribe = firebase.db
-        .collection("users")
-        .doc(userData.authUser.uid)
-        .onSnapshot(
-          doc => {
-            updatedb(doc.data());
-          },
-          err => {
-            console.log(err);
-          }
-        );
-      return () => unsubscribe();
-    },
-    [firebase, props.item.id, userData.authUser.uid]
-  );
+  useEffect(() => {
+    let unsubscribe = firebase.db
+      .collection("items")
+      .doc(props.item.id)
+      .onSnapshot(
+        doc => {
+          updateAmount(doc.data().count);
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    return () => unsubscribe();
+}, [firebase, props.item.id]);
 
   function updateBank(amount) {
     firebase.db
       .collection("users")
       .doc(userData.authUser.uid)
-      .update({ bank: dbUser.bank + amount });
+      .update({ bank: dbUser + amount })
+      // .then(function(...test) {
+      //     console.log(test)
+      // });
   }
 
   function buyItem() {
-    console.log("buying Item");
     firebase.db
       .collection("items")
       .doc(props.item.id)
-      .set({
-        count: amount.current - 1,
-        name: name.current,
-        price: unformatted.current
-      })
+      .update({count: amount - 1})
       .then(function() {
         console.log("Document successfully written!");
       })
@@ -74,13 +71,13 @@ function Item(props) {
       });
     updateBank(unformatted.current);
   }
-  let disabled = !amount.current;
-  // console.log(disabled);
+  let disabled = !amount;
+
   return (
     <Card className="item">
       <CardHeader title={name.current} subheader={cost} />
       <div id="content">
-        <CardContent>{amount.current} Remaining</CardContent>
+        <CardContent>{amount} Remaining</CardContent>
         <CardActions disableSpacing>
           <Button
             disabled={disabled}
