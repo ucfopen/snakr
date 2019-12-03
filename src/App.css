@@ -498,6 +498,12 @@ a .MuiButton-contained:hover, button.MuiButton-contained:hover {
     }
 }
 
+@media screen and (max-width: 800px) {
+    #longTitle {
+        display: none;
+    }
+}
+
 @media screen and (max-width: 30em) {
     #desktop {
         display: none !important;

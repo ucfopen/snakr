@@ -93,7 +93,7 @@ function Header(props) {
       <header className="App-header big-header">
         <div id="site-nav">
           <Link to="/">
-            <h1>Snakr - The Snack Solution</h1>
+            <h1>Snakr <span id="longTitle"> - The Snack Solution</span></h1>
           </Link>
           {login ? "" : <Link to="/login">Login</Link>}
         </div>
@@ -105,7 +105,7 @@ function Header(props) {
       <header className="App-header">
         <div id="desktop">
           <Link to="/">
-            <h1>Snakr - The Snack Solution</h1>
+            <h1>Snakr <span id="longTitle"> - The Snack Solution</span></h1>
           </Link>
           <nav>{navLinks}</nav>
         </div>
