@@ -46,7 +46,7 @@ function Restock() {
 
   return (
         <div className="pantry">
-          <h2>Add a Case</h2>
+          <h2>Restock a Case</h2>
           <div id="pantry-items">
             {boxes
               ? boxes.map(function(box) {
@@ -54,7 +54,7 @@ function Restock() {
                 })
               : ""}
           </div>
-          <h2>Add a Can</h2>
+          <h2>Restock Cans</h2>
           <div id="pantry-items">
             {cans
               ? cans.map(function(can) {

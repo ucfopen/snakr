@@ -78,7 +78,6 @@ function Additem(props) {
   }
 
   return (
-    <div className="main">
       <div className="add">
         <div id="addingContainer">
           <h2>
@@ -132,7 +131,6 @@ function Additem(props) {
           <Button variant="contained" onClick={() => addItem()}>Add Item</Button>
         </div>
       </div>
-    </div>
   );
 }
 

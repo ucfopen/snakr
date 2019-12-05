@@ -287,18 +287,18 @@ header.App-header #desktop, header.App-header #desktop {
     margin-left: 170px;
 }
 
-.container>div:not(.admin) .MuiFormLabel-root {
+.container div.admin .add .MuiFormLabel-root, #profile .MuiFormLabel-root {
     color: rgba(255, 255, 255, 0.54);
 }
-.container>div:not(.admin) .MuiInput-underline:before {
+.container div.admin .add .MuiInput-underline:before, #profile .MuiInput-underline:before {
     border-bottom: 1px solid rgba(255, 255, 255, 0.42);
 }
 
-.container>div:not(.admin) .MuiInputBase-input {
+.container div.admin .add .MuiInputBase-input, #profile .MuiInputBase-input {
     color: rgba(255, 255, 255, 0.87);
 }
 
-.container>div:not(.admin) .MuiInput-underline:hover:not(.Mui-disabled):before {
+.container div.admin .add .MuiInput-underline:hover:not(.Mui-disabled):before, #profile .MuiInput-underline:hover:not(.Mui-disabled):before {
     border-bottom: 2px solid rgba(255, 255, 255, 0.87)
 }
 
@@ -318,6 +318,7 @@ header.App-header #desktop, header.App-header #desktop {
     width: 100%;
     position: fixed;
     bottom: 0;
+    left: 0;
 }
 
 #site-nav {
@@ -431,6 +432,8 @@ a .MuiButton-contained:hover, button.MuiButton-contained:hover {
     /* background: var(--light-background); */
     border-radius: 8px;
     color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 /* .add #addingContainer h2 {
@@ -438,14 +441,18 @@ a .MuiButton-contained:hover, button.MuiButton-contained:hover {
 } */
 
 #addingContainer h3 {
-    /* color: var(--global-background); */
     margin: 0;
+    align-self: flex-start;
 }
 
 #addingContainer>div {
     display: flex;
-    align-items: baseline;
-    justify-content: center;
+    flex-direction: column;
+    margin: 3% 0;
+}
+
+#addingContainer button {
+    align-self: flex-end;
 }
 
 #addingContainer .MuiFormControl-root {
@@ -455,6 +462,10 @@ a .MuiButton-contained:hover, button.MuiButton-contained:hover {
 
 .MuiDrawer-root>.MuiPaper-root {
     z-index: 1;
+}
+
+.MuiDrawer-root>.MuiPaper-root>div:first-child {
+    min-height: 8vh;
 }
 
 @media screen and (min-width: 30em) {
@@ -476,7 +487,7 @@ a .MuiButton-contained:hover, button.MuiButton-contained:hover {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        width: 80%;
+        width: 95%;
         margin: auto;
     }
 
@@ -524,17 +535,13 @@ a .MuiButton-contained:hover, button.MuiButton-contained:hover {
 
 @media screen and (max-width: 500px) {
 
-
-
-
     #addingContainer>div {
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
         margin: 10px auto;
         border: 1px solid var(--purple);
         border-radius: 5px;
-        padding: 5px 0;
+        width: 100%;
+        padding: 1%;
     }
 
 

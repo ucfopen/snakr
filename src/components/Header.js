@@ -52,13 +52,6 @@ function Header(props) {
             </Link>
           </Button>
         </li>
-        <li className="nav__li">
-          <Button>
-            <Link to="/" className="nav__link">
-              Users
-            </Link>
-          </Button>
-        </li>
         <li>
           <Button onClick={signout}>Logout</Button>
         </li>

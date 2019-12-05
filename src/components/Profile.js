@@ -31,9 +31,9 @@ function Profile() {
   function update(newName) {
     firebase.db.collection("users").doc(userData.authUser.uid).update({name: newName});
   }
-  
+
   return (
-    <div>
+    <div id="profile">
     <h2>Update Display Name</h2>
     <div className="input">
     <TextField

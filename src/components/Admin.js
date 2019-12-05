@@ -14,6 +14,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import Restock from "./Restock";
 import Additem from "./Additem";
+import Bank from "./Bank";
 
 const drawerWidth = 170;
 
@@ -55,7 +56,7 @@ function Admin() {
         <div className={classes.toolbar} />
         <List>
           {["Restock", "New Item", "Bank"].map((text, index) => (
-            <ListItem button key={text} onClick={() => setCurrPage(text)}>
+            <ListItem button key={text} onClick={() => setCurrPage(text.replace(/\s/g, ''))}>
               <ListItemIcon>
                 {(() => {
                   switch (index) {
@@ -79,10 +80,10 @@ function Admin() {
         switch (currPage) {
           case "Restock":
             return <Restock directTo={page => setCurrPage(page)} />;
-          case "New Item":
+          case "NewItem":
             return <Additem directTo={page => setCurrPage(page)} />;
           case "Bank":
-            return null;
+            return <Bank directTo={page => setCurrPage(page)} />;
           default:
             return null;
         }
