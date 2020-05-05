@@ -35,8 +35,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3)
-  },
-  toolbar: theme.mixins.toolbar
+  }
 }));
 
 function Admin() {
@@ -53,10 +52,14 @@ function Admin() {
           paper: classes.drawerPaper
         }}
       >
-        <div className={classes.toolbar} />
+        <div />
         <List>
           {["Restock", "New Item", "Bank"].map((text, index) => (
-            <ListItem button key={text} onClick={() => setCurrPage(text.replace(/\s/g, ''))}>
+            <ListItem
+              button
+              key={text}
+              onClick={() => setCurrPage(text.replace(/\s/g, ""))}
+            >
               <ListItemIcon>
                 {(() => {
                   switch (index) {

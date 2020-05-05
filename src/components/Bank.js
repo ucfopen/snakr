@@ -1,17 +1,33 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardActions from "@material-ui/core/CardActions";
+import React, { useContext, useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 import { FirebaseContext } from "./Firebase";
-
-// import UserContext from "./UserContext";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 function Bank(props) {
   const firebase = useContext(FirebaseContext);
   const [users, updateUsers] = useState();
+  const [from, setFrom] = React.useState("");
+  const [to, setTo] = React.useState("");
+  const [person, setPerson] = React.useState("");
+  const [amountMove, setAmountMove] = React.useState(0);
+  const [amountUp, setAmountUp] = React.useState(0);
+
+  const handleChangeFrom = event => {
+    setFrom(event.target.value);
+  };
+
+  const handleChangeTo = event => {
+    setTo(event.target.value);
+  };
+
+  const handleChangePerson = event => {
+    setPerson(event.target.value);
+  };
 
   useEffect(() => {
     firebase.db
@@ -20,8 +36,6 @@ function Bank(props) {
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-          // doc.data() is never undefined for query doc snapshots
-          console.log(doc.data());
           let id = doc.id;
           let thing = doc.data();
 
@@ -33,44 +47,162 @@ function Bank(props) {
       });
   }, [firebase]);
 
-  // useEffect(() => {
-  //   let checkboxeslen = Object.keys(checkboxValue).length;
-  //   if (itemData && checkboxeslen > 0) {
-  //     let options = Object.values(itemData.options).map(function(option) {
-  //       const value = option.color;
-  //       // These checkboxes are incredibly slow to update, need to figure out how to make it faster
-  //       return (
-  //         <FormControlLabel
-  //           control={
-  //             <Checkbox
-  //               value={checkboxValue[value]}
-  //               onChange={e =>
-  //                 setCheckValue((currentCheckboxValue) => ({ ...currentCheckboxValue, [value]: e.target.checked }))
-  //               }
-  //               checked={checkboxValue[value]}
-  //             />
-  //           }
-  //           label={option.color}
-  //           key={value}
-  //         />
-  //       );
-  //
-  //       // Attempted vanillla input, did not speed up interaction
-  //       //<div key={itemData.options[key].color}>
-  //       //<input type="checkbox" name={itemData.options[key].color} id={value} value={checkboxValue[value]} onChange={e => setCheckValue({...checkboxValue, [value]: e.target.checked})} checked={checkboxValue[value]}/>
-  //       //<label htmlFor={value}>{itemData.options[key].color}</label>
-  //       //</div>
-  //     });
-  //     setCheckboxOptions(options);
-  //     setSubmitted( (submitted) => ({ ...submitted, url: true }));
-  //   }
-  // }, [itemData, checkboxValue]);
+  function move() {
+    console.log(to, from, amountMove);
+    let intVersion = parseInt(amountMove);
+    console.log(users[from].bank - intVersion);
+    console.log(users[to].bank + intVersion);
+    firebase.db
+      .collection("users")
+      .doc(from)
+      .update({ bank: users[from].bank - intVersion });
+    firebase.db
+      .collection("users")
+      .doc(to)
+      .update({ bank: users[to].bank + intVersion });
+    reset();
+  }
+  function update() {
+    console.log(person, amountUp);
+    let intVersion = parseInt(amountUp);
+    console.log(users[person].bank + intVersion);
+    firebase.db
+      .collection("users")
+      .doc(person)
+      .update({ bank: users[person].bank + intVersion });
+    reset();
+  }
 
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
+  function reset() {
+    setFrom("");
+    setTo("");
+    setPerson("");
+    setAmountMove(0);
+    setAmountUp(0);
+  }
 
-  return <div>Test</div>;
+  return (
+    <div className="bank">
+      <h2>Banking</h2>
+      <div id="move">
+        <h3>Move Funds Between Users</h3>
+        <div id="textfields">
+          {users ? (
+            <FormControl>
+              <InputLabel id="from-label">From (User)</InputLabel>
+              <Select
+                labelId="from-label"
+                id="from"
+                value={from}
+                onChange={handleChangeFrom}
+              >
+                {Object.keys(users).map(function(item, index) {
+                  return (
+                    <MenuItem value={item} key={users[item]["name"]}>
+                      {users[item]["name"]}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          ) : (
+            ""
+          )}
+          {users ? (
+            <FormControl>
+              <InputLabel id="to-label">To (User)</InputLabel>
+              <Select
+                labelId="to-label"
+                id="to"
+                value={to}
+                onChange={handleChangeTo}
+              >
+                {Object.keys(users).map(function(item, index) {
+                  return (
+                    <MenuItem value={item} key={users[item]["name"]}>
+                      {users[item]["name"]}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          ) : (
+            ""
+          )}
+          <TextField
+            value={amountMove}
+            id="amount-moving"
+            type="number"
+            label="Amount"
+            margin="normal"
+            onChange={e => setAmountMove(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">$</InputAdornment>
+              )
+            }}
+          />
+        </div>
+        <Button variant="contained" onClick={move}>
+          Move
+        </Button>
+      </div>
+      <div id="update">
+        <h3>Update User Funds</h3>
+        <p>This will change the user's bank data by the specified amount.</p>
+        {person ? (
+          <p>
+            Current: {users[person].name} has ${users[person].bank}
+          </p>
+        ) : (
+          ""
+        )}
+        <div id="textfields">
+          {users ? (
+            <FormControl>
+              <InputLabel id="from-label">Person</InputLabel>
+              <Select
+                labelId="from-label"
+                id="from"
+                value={person}
+                onChange={handleChangePerson}
+              >
+                {Object.keys(users).map(function(item, index) {
+                  return (
+                    <MenuItem value={item} key={users[item]["name"]}>
+                      {users[item]["name"]}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          ) : (
+            ""
+          )}
+          <TextField
+            value={amountUp}
+            id="amount-update"
+            type="number"
+            label="Amount"
+            margin="normal"
+            onChange={e => setAmountUp(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">$</InputAdornment>
+              )
+            }}
+          />
+        </div>
+        <Button variant="contained" onClick={update}>
+          Update
+        </Button>
+      </div>
+    </div>
+  );
 }
 
 export default Bank;
+//
+// {users ? users.map(function(item) {
+//   console.log(item)
+// }) : ''}

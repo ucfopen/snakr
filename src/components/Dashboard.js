@@ -1,19 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserContext from "./UserContext";
 import Pantry from "./Pantry";
-// import Header from './Header';
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { FirebaseContext } from "./Firebase";
-import Button from "@material-ui/core/Button";
 
 function Dashboard() {
   const userData = useContext(UserContext);
-  const [admin, setAdmin] = useState(false);
   const [account, updateAcc] = useState(0);
   const [name, setName] = useState("");
   // const [focus, updateFocus] = useState(false);
   const firebase = useContext(FirebaseContext);
-  // let name = userData.authUser.displayName;
 
   // useEffect(() => {
   //     console.log(userData.authUser.displayName)
@@ -25,21 +21,9 @@ function Dashboard() {
       .doc(userData.authUser.uid)
       .get()
       .then(function(querySnapshot) {
-        if (querySnapshot.data().admin) {
-          setAdmin(true);
-        }
-      });
-  }, [firebase, userData.authUser.uid]);
-
-  useEffect(() => {
-    firebase.db
-      .collection("users")
-      .doc(userData.authUser.uid)
-      .get()
-      .then(function(querySnapshot) {
         if (querySnapshot.data().name) {
           setName(querySnapshot.data().name);
-      }
+        }
       });
   }, [firebase, userData.authUser.uid, name]);
 
@@ -81,17 +65,14 @@ function Dashboard() {
     return (
       <div className="dashboard">
         <header id="dashboardHeader">
-          {name ? <h2>Hello {name}</h2> : <h2>Please head to the profile page to set your display name.</h2>}
+          {name ? (
+            <h2>Hello {name}</h2>
+          ) : (
+            <h2>Please head to the profile page to set your display name.</h2>
+          )}
           <p>Your balance is ${account.toFixed(2)}</p>
         </header>
         <Pantry />
-        {admin ? (
-          <Link to="/admin">
-            <Button variant="contained">Admin</Button>
-          </Link>
-        ) : (
-          ""
-        )}
       </div>
     );
   }

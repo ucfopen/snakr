@@ -19,73 +19,74 @@ function Additem(props) {
 
   function addItem() {
     //firebase.google.com/docs/reference/js/firebase.database.Reference.html#update
-    if(itemVals.name) {
-        if(itemVals.upcC) {
-            console.log("Adding a case");
-            firebase.db
-              .collection("boxes")
-              .doc(itemVals.upcC)
-              .set({
-                item: itemVals.upcI,
-                name: itemVals.name,
-                size: itemVals.amount
-              })
-              .then(function() {
-                console.log("Document successfully written!");
-              })
-              .catch(function(error) {
-                console.error("Error writing document: ", error);
-              });
-              firebase.db
-                .collection("items")
-                .doc(itemVals.upcI)
-                .set({
-                  count: itemVals.amount,
-                  name: itemVals.name,
-                  price: itemVals.price
-                })
-                .then(function() {
-                  console.log("Document successfully written!");
-                })
-                .catch(function(error) {
-                  console.error("Error writing document: ", error);
-                });
-        } else {
-            firebase.db
-              .collection("items")
-              .doc(itemVals.upcI)
-              .set({
-                count: 1,
-                name: itemVals.name,
-                price: itemVals.price
-              })
-              .then(function() {
-                console.log("Document successfully written!");
-              })
-              .catch(function(error) {
-                console.error("Error writing document: ", error);
-              });
-        }
-        updateItem({
-          name: "",
-          upcI: "",
-          price: 0.5,
-          upcC: "",
-          amount: 36
+    if (itemVals.name) {
+      if (itemVals.upcC) {
+        console.log("Adding a case");
+        firebase.db
+          .collection("boxes")
+          .doc(itemVals.upcC)
+          .set({
+            item: itemVals.upcI,
+            name: itemVals.name,
+            size: itemVals.amount
+          })
+          .then(function() {
+            console.log("Document successfully written!");
+          })
+          .catch(function(error) {
+            console.error("Error writing document: ", error);
+          });
+        firebase.db
+          .collection("items")
+          .doc(itemVals.upcI)
+          .set({
+            count: itemVals.amount,
+            name: itemVals.name,
+            price: itemVals.price
+          })
+          .then(function() {
+            console.log("Document successfully written!");
+          })
+          .catch(function(error) {
+            console.error("Error writing document: ", error);
+          });
+      } else {
+        firebase.db
+          .collection("items")
+          .doc(itemVals.upcI)
+          .set({
+            count: 1,
+            name: itemVals.name,
+            price: itemVals.price
+          })
+          .then(function() {
+            console.log("Document successfully written!");
+          })
+          .catch(function(error) {
+            console.error("Error writing document: ", error);
+          });
+      }
+      updateItem({
+        name: "",
+        upcI: "",
+        price: 0.5,
+        upcC: "",
+        amount: 36
       });
     }
-
   }
 
   return (
-      <div className="add">
-        <div id="addingContainer">
-          <h2>
-            Complete all fields if you are adding a case, if adding a single
-            item leave case fields blank.
-          </h2>
-          <div id="single">
-            <h3>Item:</h3>
+    <div className="add">
+      <h2>Add New Item</h2>
+      <div id="addingContainer">
+        <h3>
+          Complete all fields if you are adding a case, leave case blank if
+          adding a single item.
+        </h3>
+        <div id="single">
+          <h3>Item:</h3>
+          <div id="textfields">
             <TextField
               id="productName"
               label="Product Name"
@@ -109,8 +110,10 @@ function Additem(props) {
               margin="normal"
             />
           </div>
-          <div id="case">
-            <h3>Case:</h3>
+        </div>
+        <div id="case">
+          <h3>Case:</h3>
+          <div id="textfields">
             <TextField
               id="caseUPC"
               label="Case UPC"
@@ -127,10 +130,13 @@ function Additem(props) {
               margin="normal"
             />
           </div>
-
-          <Button variant="contained" onClick={() => addItem()}>Add Item</Button>
         </div>
+
+        <Button variant="contained" onClick={() => addItem()}>
+          Add Item
+        </Button>
       </div>
+    </div>
   );
 }
 

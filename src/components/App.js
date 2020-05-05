@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
-import "../App.css";
+// import "../App.css";
+import '../App.scss';
 import Main from "./Main";
 import Login from "./Login";
 // import Content from "./Content";

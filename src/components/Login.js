@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import Button from "@material-ui/core/Button";
-import "../App.css";
+// import "../App.css";
 import Header from "./Header";
 import { FirebaseContext } from "./Firebase";
 import UserContext from "./UserContext";

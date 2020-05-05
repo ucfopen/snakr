@@ -43,26 +43,26 @@ function Restock() {
       });
   }, [firebase]);
 
-
   return (
-        <div className="pantry">
-          <h2>Restock a Case</h2>
-          <div id="pantry-items">
-            {boxes
-              ? boxes.map(function(box) {
-                  return <Item item={box} key={box.data().name} type="box" />;
-                })
-              : ""}
-          </div>
-          <h2>Restock Cans</h2>
-          <div id="pantry-items">
-            {cans
-              ? cans.map(function(can) {
-                  return <Item item={can} key={can.data().name} type="can" />;
-                })
-              : ""}
-          </div>
-        </div>
+    <div className="pantry">
+      <h2>Restock Pantry</h2>
+      <h3>Restock a Case</h3>
+      <div id="pantry-items">
+        {boxes
+          ? boxes.map(function(box) {
+              return <Item item={box} key={box.data().name} type="box" />;
+            })
+          : ""}
+      </div>
+      <h3>Restock Cans</h3>
+      <div id="pantry-items">
+        {cans
+          ? cans.map(function(can) {
+              return <Item item={can} key={can.data().name} type="can" />;
+            })
+          : ""}
+      </div>
+    </div>
   );
 }
 

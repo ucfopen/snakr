@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Button from "@material-ui/core/Button";
-import "../App.css";
+// import "../App.css";
 // import Header from "./Header";
 import { FirebaseContext } from "./Firebase";
 import UserContext from "./UserContext";
@@ -23,33 +23,35 @@ function Profile() {
   // useEffect(() => {
   //     console.log(firebase.auth.currentUser.displayName);
   // }, [firebase.auth]);
-
-  useEffect(() => {
-      console.log(nameField);
-  }, [nameField]);
+  //
+  // useEffect(() => {
+  //   console.log(nameField);
+  // }, [nameField]);
 
   function update(newName) {
-    firebase.db.collection("users").doc(userData.authUser.uid).update({name: newName});
+    firebase.db
+      .collection("users")
+      .doc(userData.authUser.uid)
+      .update({ name: newName });
   }
 
   return (
     <div id="profile">
-    <h2>Update Display Name</h2>
-    <div className="input">
-    <TextField
-      required
-      fullWidth
-      id="password"
-      label="Full Name"
-      defaultValue={name}
-      className="textfields"
-      onChange={e => setName(e.target.value)}
-      margin="normal"
-    />
-    <Button variant="contained" onClick={() => update(nameField)}>
-      Save
-    </Button>
-    </div>
+      <h2>Update Display Name</h2>
+      <div className="input">
+        <TextField
+          required
+          fullWidth
+          id="password"
+          label="Full Name"
+          defaultValue={name}
+          onChange={e => setName(e.target.value)}
+          margin="normal"
+        />
+        <Button variant="contained" onClick={() => update(nameField)}>
+          Save
+        </Button>
+      </div>
     </div>
   );
 }
