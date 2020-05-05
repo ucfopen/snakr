@@ -73,7 +73,7 @@ $purple: #8619e4;
       top: 1rem;
       left: 1rem;
       cursor: pointer;
-      transition: 600ms;
+      transition: 500ms;
     }
     .checkbox-label::before {
       content: "";
@@ -147,7 +147,7 @@ $purple: #8619e4;
       padding: 0 1rem;
       box-shadow: 0.4rem 0 2.4rem 0.2rem hsla(0, 0%, 0%, 0.2);
       transform: translateX(-100%);
-      transition: 0.4s;
+      transition: 500ms;
       #title {
         font-size: 3.2rem;
         color: $cream;
@@ -190,6 +190,7 @@ $purple: #8619e4;
   grid-area: content;
   display: flex;
   justify-content: center;
+  margin-bottom: 56px;
   > div {
     width: 80%;
     display: flex;
@@ -257,7 +258,6 @@ $purple: #8619e4;
 }
 
 .admin {
-  padding-bottom: 56px;
   .MuiDrawer-paper {
     top: unset;
   }
@@ -298,6 +298,97 @@ $purple: #8619e4;
   #move,
   #update {
     padding: 20px 0;
+  }
+}
+
+.welcome {
+  padding: 2%;
+  text-align: center;
+  img {
+    width: 100px;
+  }
+  svg {
+    height: 150px;
+    path,
+    line {
+      stroke-miterlimit: 10;
+      stroke-linecap: round;
+    }
+    .white {
+      fill: white;
+      stroke: white;
+      stroke-width: 74px;
+    }
+    #blue path {
+      fill: #08d0ff;
+    }
+    #glasses {
+      path,
+      line,
+      circle {
+        stroke-width: 25.18px;
+        stroke: black;
+      }
+      path,
+      line {
+        fill: none;
+      }
+      circle {
+        fill: white;
+      }
+    }
+    #black-outline {
+      path:not(:last-child),
+      g path {
+        stroke: black;
+        fill: none;
+      }
+      #inner {
+        stroke-width: 22px;
+      }
+      > path {
+        stroke-width: 37.49px;
+      }
+      > path:not(:first-child):not(:last-child) {
+        stroke-width: 46.65px;
+      }
+    }
+    #top {
+      > path {
+        fill: white;
+        stroke-width: 17.21px;
+      }
+      g path:last-child {
+        fill: none;
+        stroke-width: 16px;
+      }
+      path {
+        stroke: black;
+      }
+    }
+  }
+}
+
+.login {
+  min-height: 100vh;
+  #fields {
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    align-items: center;
+    justify-content: space-around;
+    #signupFields,
+    #loginFields {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80%;
+    }
+    #accountBox {
+      button {
+        color: white;
+      }
+    }
   }
 }
 
@@ -366,461 +457,19 @@ $purple: #8619e4;
       min-width: 150px;
     }
   }
-}
-
-.welcome {
-  text-align: center;
-  img {
-    width: 100px;
-  }
-  svg {
-    width: 300px;
+  .welcome svg {
     height: 300px;
   }
-  // .white {
-  //   fill: white;
-  // }
-  // .blue {
-  //   fill: #08d0ff;
-  // }
-  // .black-outline {
-  //   stroke: black;
-  //   stroke-width: 5px;
-  //   stroke-miterlimit: 10;
-  //   // display: none;
-  // }
-  // .white-outline {
-  //   stroke: white;
-  //   stroke-width: 30px;
-  //   stroke-miterlimit: 10;
-  // }
-  .noFill {
-    fill: none;
-  }
-  // .round {
-  //   stroke-linecap: round;
-  // }
-  .cls-1,
-  .cls-12,
-  .cls-14,
-  .cls-7 {
-    fill: #fff;
-  }
-  .cls-1,
-  .cls-2 {
-    stroke: #fff;
-  }
-  .cls-1,
-  .cls-10,
-  .cls-11,
-  .cls-13,
-  .cls-14,
-  .cls-2,
-  .cls-4,
-  .cls-5,
-  .cls-6,
-  .cls-7,
-  .cls-8,
-  .cls-9 {
-    stroke-miterlimit: 10;
-  }
-  .cls-1 {
-    stroke-width: 74px;
-  }
-  .cls-2 {
-    stroke-width: 71px;
-  }
-  .cls-3 {
-    fill: #06d0ff;
-  }
-  .cls-10,
-  .cls-11,
-  .cls-13,
-  .cls-14,
-  .cls-4,
-  .cls-5,
-  .cls-6,
-  .cls-7,
-  .cls-8,
-  .cls-9 {
-    stroke: #000;
-  }
-  .cls-4,
-  .cls-6 {
-    stroke-linecap: round;
-  }
-  .cls-4 {
-    stroke-width: 19.25px;
-  }
-  .cls-5,
-  .cls-6,
-  .cls-7 {
-    stroke-width: 25.18px;
-  }
-  .cls-8 {
-    stroke-width: 22px;
-  }
-  .cls-9 {
-    stroke-width: 37.49px;
-  }
-  .cls-10 {
-    stroke-width: 43.67px;
-  }
-  .cls-11 {
-    stroke-width: 46.65px;
-  }
-  .cls-13 {
-    stroke-width: 16px;
-  }
-  .cls-14 {
-    stroke-width: 17.21px;
+  .login {
+    #fields {
+      #signupFields,
+      #loginFields {
+        width: 40%;
+      }
+    }
   }
 }
-// .welcome #content {
-//   position: relative;
-//   z-index: 2;
-// }
-//
-// .App-header.big-header {
-//   height: 19vh;
-//   padding-left: 0;
-// }
-//
-// #big-header {
-//   width: 100%;
-//   height: 60%;
-//   overflow: hidden;
-//   -webkit-transform: skewY(6deg);
-//   transform: skewY(6deg);
-//   -webkit-transform-origin: 0;
-//   transform-origin: 0;
-//   background: linear-gradient(150deg, #53f 40%, #05d1ff 78%, var(--purple) 98%);
-//   position: absolute;
-//   top: -46vh;
-// }
-//
-// .App-header.big-header #site-nav {
-//   justify-content: center;
-// }
-//
-// .App-header button {
-//   margin-left: auto;
-//   margin-right: 1%;
-//   color: white;
-// }
 
 .hidden {
   display: none !important;
 }
-
-//
-// .main {
-//   text-align: center;
-//   background-color: #282c34;
-//   height: 100%;
-//   padding-bottom: 5vh;
-// }
-//
-//
-// header.App-header #desktop, header.App-header #desktop {
-//     background: linear-gradient(150deg,#53f 40%,#05d1ff 78%,var(--purple) 98%);
-// }
-//
-// .content, .login, .signin {
-//     height: 92.6vh;
-// }
-//
-// #fields {
-//     height: 92.6vh;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-evenly;
-//     background: var(--global-background);
-// }
-//
-// #loginFields, #signupFields {
-//     /* margin: auto; */
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     height: 45vh;
-//     justify-content: center;
-//     padding: 2%;
-//     background-color: var(--light-background);
-//     border-radius: 10px;
-// }
-//
-// #loginFields div[type*="light"]:hover {
-//     box-shadow: var(--purple) 0px 2px 4px 0px !important;
-// }
-//
-// #accountBox button {
-//     display: block;
-//     margin: auto;
-//     color: white;
-// }
-//
-// .welcome {
-//     text-align: center;
-// }
-//
-// .welcome img {
-//     width: 100px;
-// }
-//
-// .welcome #content {
-//     position: relative;
-//     z-index: 2;
-// }
-//
-// .App-header.big-header {
-//     height: 19vh;
-//     padding-left: 0;
-// }
-//
-// #big-header {
-//     width: 100%;
-//     height: 60%;
-//     overflow: hidden;
-//     -webkit-transform: skewY(6deg);
-//     transform: skewY(6deg);
-//     -webkit-transform-origin: 0;
-//     transform-origin: 0;
-//     background: linear-gradient(150deg,#53f 40%,#05d1ff 78%,var(--purple) 98%);
-//     position: absolute;
-//     top: -46vh;
-// }
-//
-// .App-header.big-header #site-nav {
-//     justify-content: center;
-// }
-//
-// .App-header button {
-//     margin-left: auto;
-//     margin-right: 1%;
-//     color: white;
-// }
-//
-// .container>div:not(.admin) {
-//     width: 90%;
-//     /* margin-top: 2%; */
-//     margin: 2% auto;
-// }
-//
-// .admin {
-//     margin-left: 170px;
-// }
-//
-// #profile .input {
-//   width: 60%;
-//   margin: auto;
-// }
-//
-// .container div.admin .add .MuiFormLabel-root, #profile .MuiFormLabel-root {
-//     color: rgba(255, 255, 255, 0.54);
-// }
-// .container div.admin .add .MuiInput-underline:before, #profile .MuiInput-underline:before {
-//     border-bottom: 1px solid rgba(255, 255, 255, 0.42);
-// }
-//
-// .container div.admin .add .MuiInputBase-input, #profile .MuiInputBase-input {
-//     color: rgba(255, 255, 255, 0.87);
-// }
-//
-// .container div.admin .add .MuiInput-underline:hover:not(.Mui-disabled):before, #profile .MuiInput-underline:hover:not(.Mui-disabled):before {
-//     border-bottom: 2px solid rgba(255, 255, 255, 0.87)
-// }
-//
-// .container .MuiInput-underline:hover:not(.Mui-disabled):before {
-//     border-bottom: 2px solid var(--purple);
-// }
-//
-// .container .MuiFormLabel-root.Mui-focused {
-//     color: var(--purple);
-// }
-//
-// .container .MuiInput-underline:after {
-//     border-bottom: 2px solid var(--purple);
-// }
-//
-// .MuiBottomNavigation-root {
-//     width: 100%;
-//     position: fixed;
-//     bottom: 0;
-//     left: 0;
-// }
-//
-// #site-nav {
-//     z-index: 1;
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-between;
-//     align-items: center;
-//     padding-top: 1vh;
-//     width: 100%;
-// }
-//
-
-//
-// header a, header a:visited {
-//     color: white;
-//     text-decoration: none;
-// }
-//
-// .signin {
-//     color: black;
-// }
-//
-// a .MuiButton-contained:hover, button.MuiButton-contained:hover {
-//     background-color: var(--purple);
-//     color: white;
-// }
-//
-// .hidden {
-//     display: none !important;
-// }
-//
-// .up .svg-inline--fa {
-//     vertical-align: -0.425em;
-// }
-//
-// .down .svg-inline--fa {
-//     vertical-align: 0.075em;
-// }
-//
-// #pantry-items .MuiButton-textPrimary {
-//     color: var(--purple);
-// }
-//
-// #pantry-items .MuiButton-root.Mui-disabled {
-//     color: rgba(0, 0, 0, 0.26);
-// }
-//
-// .add #addingContainer {
-//     width: 80%;
-//     margin: auto;
-//     /* padding: 1rem; */
-//     /* background: var(--light-background); */
-//     border-radius: 8px;
-//     color: white;
-//     display: flex;
-//     flex-direction: column;
-// }
-//
-// /* .add #addingContainer h2 {
-//     color: var(--global-background);
-// } */
-//
-// #addingContainer h3 {
-//     margin: 0;
-//     align-self: flex-start;
-// }
-//
-// #addingContainer>div {
-//     display: flex;
-//     flex-direction: column;
-//     margin: 3% 0;
-// }
-//
-// #addingContainer button {
-//     align-self: flex-end;
-// }
-//
-// #addingContainer .MuiFormControl-root {
-//     margin-left: 8px;
-//     margin-right: 8px;
-// }
-//
-// .MuiDrawer-root>.MuiPaper-root {
-//     z-index: 1;
-// }
-//
-// .MuiDrawer-root>.MuiPaper-root>div:first-child {
-//     min-height: 8vh;
-// }
-//
-// #bank {
-//   display: flex;
-//   justify-content: space-between;
-//   flex-direction: column;
-//   height: 100%;
-// }
-//
-// @media screen and (min-width: 30em) {
-//     #site-nav {
-//         margin-top: -8vh;
-//     }
-//
-//     .App-header.big-header {
-//         height: 10vh;
-//         padding-top: 6vh;
-//     }
-//
-//     #loginFields, #signupFields {
-//         width: 50vw;
-//         margin: 0 auto;
-//     }
-//
-//     #pantry-items {
-//         display: flex;
-//         flex-wrap: wrap;
-//         justify-content: center;
-//         width: 95%;
-//         margin: auto;
-//     }
-//
-//     .item {
-//         width: 17%;
-//         margin: 1%;
-//     }
-//
-//     #mobile {
-//         display: none;
-//     }
-//
-//     #desktop nav a {
-//         font-size: 0.875rem;
-//     }
-//
-//     .admin .MuiBottomNavigation-root {
-//         display: none;
-//     }
-// }
-//
-// @media screen and (max-width: 800px) {
-//     #longTitle {
-//         display: none;
-//     }
-// }
-//
-// @media screen and (max-width: 30em) {
-//     #desktop {
-//         display: none !important;
-//     }
-//
-//     .App-header {
-//         padding-top: 5vh;
-//     }
-//
-//     .MuiDrawer-root {
-//         display: none;
-//     }
-//
-//     .admin {
-//         margin-left: 0;
-//     }
-// }
-//
-// @media screen and (max-width: 500px) {
-//
-//     #addingContainer>div {
-//         flex-direction: column;
-//         margin: 10px auto;
-//         border: 1px solid var(--purple);
-//         border-radius: 5px;
-//         width: 100%;
-//         padding: 1%;
-//     }
-//
-//
-// }

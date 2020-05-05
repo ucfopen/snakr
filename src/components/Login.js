@@ -49,11 +49,9 @@ function Login() {
   }
 
   function signinEmail(email, pass) {
-    firebase
-      .doSignInWithEmailAndPassword(email, pass)
-      .catch(error => {
-        console.log(error);
-      });
+    firebase.doSignInWithEmailAndPassword(email, pass).catch(error => {
+      console.log(error);
+    });
   }
 
   function signup(email, pass) {
@@ -65,7 +63,7 @@ function Login() {
             firebase.db
               .collection("users")
               .doc(authUser.user.uid)
-              .set({ bank: 0, admin: false, name: '' });
+              .set({ bank: 0, admin: false, name: "" });
           }
         }
       })
@@ -79,7 +77,7 @@ function Login() {
   const fields = (
     <div id="fields">
       <div id="loginFields" className={newUser ? "hidden" : ""}>
-        <p>Sign In for Snacks</p>
+        <h2>Sign In for Snacks</h2>
         <TextField
           required
           fullWidth
@@ -112,7 +110,7 @@ function Login() {
         {googleLogin}
       </div>
       <div id="signupFields" className={newUser ? "" : "hidden"}>
-        <p>Create an Account</p>
+        <h2>Create an Account</h2>
         <TextField
           required
           fullWidth
@@ -160,17 +158,19 @@ function Login() {
 
   return (
     <div className="login">
-      <Header login="true" />
-      <div className="signin">
-        {userData.authUser ? (
-          <Redirect
-            to={{
-              pathname: "/"
-            }}
-          />
-        ) : (
-          fields
-        )}
+      <div class="grid-container">
+        <Header login="true" />
+        <div class="content">
+          {userData.authUser ? (
+            <Redirect
+              to={{
+                pathname: "/"
+              }}
+            />
+          ) : (
+            fields
+          )}
+        </div>
       </div>
     </div>
   );
