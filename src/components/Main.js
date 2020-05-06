@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Content from "./Content";
 // import Dashboard from "./Dashboard";
 // import Header from './Header';
@@ -6,12 +6,10 @@ import Welcome from "./Welcome";
 import UserContext from "./UserContext";
 
 function Main() {
-      const userData = useContext(UserContext);
+  const userData = useContext(UserContext);
 
   return (
-    <div className="main">
-        {userData.authUser ? <Content /> : <Welcome />}
-    </div>
+    <div className="main">{userData.authUser ? <Content /> : <Welcome />}</div>
   );
 }
 

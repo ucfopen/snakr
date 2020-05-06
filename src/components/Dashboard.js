@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import UserContext from "./UserContext";
 import Pantry from "./Pantry";
+import Loading from "./Loading";
 import { Redirect } from "react-router-dom";
 import { FirebaseContext } from "./Firebase";
 
@@ -8,12 +9,8 @@ function Dashboard() {
   const userData = useContext(UserContext);
   const [account, updateAcc] = useState(0);
   const [name, setName] = useState("");
-  // const [focus, updateFocus] = useState(false);
+  const [loading, setLoading] = useState(true);
   const firebase = useContext(FirebaseContext);
-
-  // useEffect(() => {
-  //     console.log(userData.authUser.displayName)
-  // });
 
   useEffect(() => {
     firebase.db
@@ -24,19 +21,9 @@ function Dashboard() {
         if (querySnapshot.data().name) {
           setName(querySnapshot.data().name);
         }
+        setLoading(false);
       });
   }, [firebase, userData.authUser.uid, name]);
-
-  // const unsubscribe = firebase.firestore().collection('recipes') .doc(id).onSnapshot( doc => { setLoading(false) setRecipe(doc) }, err => { setError(err) } )
-  // useEffect(() => {
-  //     if(focus!== document.hasFocus()) {
-  //         updateFocus(document.hasFocus())
-  //     }
-  //     console.log(focus);
-  // }, [focus])
-  // useEffect(() => {
-  //     console.log("reload")
-  // });
 
   //Get User bank data
   useEffect(() => {
@@ -64,6 +51,7 @@ function Dashboard() {
   } else {
     return (
       <div className="dashboard">
+        {loading ? <Loading /> : ""}
         <header id="dashboardHeader">
           {name ? (
             <h2>Hello {name}</h2>

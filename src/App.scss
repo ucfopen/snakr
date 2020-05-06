@@ -54,6 +54,13 @@ $purple: #8619e4;
       color: $dark-grey;
     }
     display: none;
+    li {
+      margin: 0 5px;
+    }
+    .MuiButton-root:hover {
+      color: $purple;
+      background-color: rgba(134, 25, 228, 0.14);
+    }
   }
   #mobile {
     #nav-checkbox {
@@ -215,11 +222,15 @@ $purple: #8619e4;
       min-width: 190px;
       padding: 2%;
       margin: 1.4%;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
       > * {
         font-size: smaller;
       }
       .MuiTypography-h5 {
         font-size: 1.2rem;
+        max-width: 175px;
       }
       .MuiCardHeader-root {
         padding: 0;
@@ -239,6 +250,12 @@ $purple: #8619e4;
         .MuiCardActions-root {
           padding: 2px;
           justify-content: flex-end;
+          .MuiButton-textPrimary {
+            color: $purple;
+          }
+          .MuiButton-textPrimary:hover {
+            background-color: rgba(134, 25, 228, 0.14);
+          }
         }
         .MuiFormControl-root {
           max-width: 85px;
@@ -307,65 +324,99 @@ $purple: #8619e4;
   img {
     width: 100px;
   }
-  svg {
+  #snaky {
     height: 150px;
+  }
+}
+
+#snaky {
+  path,
+  line {
+    stroke-miterlimit: 10;
+    stroke-linecap: round;
+  }
+  .white {
+    fill: white;
+    stroke: white;
+    stroke-width: 74px;
+  }
+  #blue path {
+    fill: #08d0ff;
+  }
+  #faceGroup,
+  #glasses {
+    path,
+    line,
+    circle {
+      stroke-width: 25.18px;
+      stroke: black;
+    }
     path,
     line {
-      stroke-miterlimit: 10;
-      stroke-linecap: round;
+      fill: none;
     }
-    .white {
+    circle {
       fill: white;
-      stroke: white;
-      stroke-width: 74px;
     }
-    #blue path {
-      fill: #08d0ff;
+  }
+  #black-outline {
+    path:not(:last-child),
+    g path {
+      stroke: black;
+      fill: none;
     }
-    #glasses {
-      path,
-      line,
-      circle {
-        stroke-width: 25.18px;
-        stroke: black;
-      }
-      path,
-      line {
-        fill: none;
-      }
-      circle {
-        fill: white;
-      }
+    #inner {
+      stroke-width: 22px;
     }
-    #black-outline {
-      path:not(:last-child),
-      g path {
-        stroke: black;
-        fill: none;
-      }
-      #inner {
-        stroke-width: 22px;
-      }
-      > path {
-        stroke-width: 37.49px;
-      }
-      > path:not(:first-child):not(:last-child) {
-        stroke-width: 46.65px;
-      }
+    > path {
+      stroke-width: 37.49px;
     }
-    #top {
-      > path {
-        fill: white;
-        stroke-width: 17.21px;
-      }
-      g path:last-child {
-        fill: none;
-        stroke-width: 16px;
-      }
-      path {
-        stroke: black;
-      }
+    > path:not(:first-child):not(:last-child) {
+      stroke-width: 46.65px;
     }
+  }
+  #top {
+    > path {
+      fill: white;
+      stroke-width: 17.21px;
+    }
+    g path:last-child {
+      fill: none;
+      stroke-width: 16px;
+    }
+    path {
+      stroke: black;
+    }
+  }
+}
+
+.face:hover {
+  animation: shake 1.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(0, 3px, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(0, -5px, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(0, 5px, 0);
   }
 }
 
@@ -389,6 +440,22 @@ $purple: #8619e4;
         color: white;
       }
     }
+  }
+}
+
+.loading {
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  background-color: $dark-grey;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  #snaky {
+    height: 200px;
   }
 }
 
@@ -457,7 +524,7 @@ $purple: #8619e4;
       min-width: 150px;
     }
   }
-  .welcome svg {
+  .welcome #snaky {
     height: 300px;
   }
   .login {

@@ -1,12 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
-// import "../App.css";
-import '../App.scss';
+import "../App.scss";
 import Main from "./Main";
 import Login from "./Login";
-// import Content from "./Content";
-// import Admin from "./Admin";
-// import Welcome from "./Welcome";
-// import Additem from "./Additem";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserContext from "./UserContext";
 import { FirebaseContext } from "./Firebase";
@@ -63,10 +58,3 @@ function App() {
 }
 
 export default App;
-
-// <Route path="/" exact component={Main} />
-// <Route path="/login" component={Login} />
-// <Route path="/dashboard" component={Content} />
-// <Route path="/admin" component={Admin} />
-// <Route path="/welcome" component={Welcome} />
-// <Route path="/add" component={Additem} />
