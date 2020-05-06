@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import "../App.scss";
 import Main from "./Main";
 import Login from "./Login";
+import Loading from "./Loading";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserContext from "./UserContext";
 import { FirebaseContext } from "./Firebase";
@@ -50,6 +51,7 @@ function App() {
       <UserContext.Provider value={user}>
         <Switch>
           <Route path="/login" exact component={Login} />
+          <Route path="/loading" component={Loading} />
           <Route path="/" component={Main} />
         </Switch>
       </UserContext.Provider>

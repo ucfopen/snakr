@@ -390,6 +390,36 @@ $purple: #8619e4;
   }
 }
 
+.allWobble {
+  animation: shakeTwo 1.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-origin: 547.104px 212.299px;
+}
+
+@keyframes shakeTwo {
+  10%,
+  90% {
+    transform: rotate(5deg);
+  }
+
+  20%,
+  80% {
+    transform: rotate(7deg);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: rotate(10deg);
+  }
+
+  40%,
+  60% {
+    transform: rotate(5deg);
+  }
+}
+
 .face:hover {
   animation: shake 1.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
   transform: translate3d(0, 0, 0);
