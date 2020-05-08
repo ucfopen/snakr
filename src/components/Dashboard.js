@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import UserContext from "./UserContext";
 import Pantry from "./Pantry";
 import Loading from "./Loading";
+import Button from "@material-ui/core/Button";
 import { Redirect } from "react-router-dom";
 import { FirebaseContext } from "./Firebase";
 
@@ -11,7 +12,6 @@ function Dashboard() {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
   const firebase = useContext(FirebaseContext);
-
   useEffect(() => {
     firebase.db
       .collection("users")
@@ -59,6 +59,27 @@ function Dashboard() {
             <h2>Please head to the profile page to set your display name.</h2>
           )}
           <p>Your balance is ${account.toFixed(2)}</p>
+          {account > 0 ? (
+            <p>
+              Pay with:
+              <br />
+              <Button
+                href={"***REMOVED***" + account}
+                variant="contained"
+              >
+                Square Cash
+              </Button>
+              &nbsp;
+              <Button
+                href={"***REMOVED***" + account}
+                variant="contained"
+              >
+                Paypal
+              </Button>
+            </p>
+          ) : (
+            ""
+          )}
         </header>
         <Pantry />
       </div>
