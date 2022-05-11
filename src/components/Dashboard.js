@@ -64,14 +64,14 @@ function Dashboard() {
               Pay with:
               <br />
               <Button
-                href={"***REMOVED***" + account}
+                href={"CHANGEME" + account}
                 variant="contained"
               >
                 Square Cash
               </Button>
               &nbsp;
               <Button
-                href={"***REMOVED***" + account}
+                href={"CHANGEME" + account}
                 variant="contained"
               >
                 Paypal
